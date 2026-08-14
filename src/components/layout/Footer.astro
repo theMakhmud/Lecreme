@@ -1,0 +1,164 @@
+<footer>
+    <div class="wrapper">
+        <div class="first">
+            <h2 style="">Lecrem</h2>
+            <a href="tel:+79000000000" style="">+7 (900) 000-00-00</a>
+            <span style="">пн–сб, 09:00–20:00</span>
+            <div>
+                <a href="#">Telegram</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+
+        <div class="center">
+            <span>Каталог</span>
+            <div>
+                <a href="#catalog">Пирожные</a>
+                <a href="#catalog">Десерты</a>
+                <a href="#catalog">Булочки</a>
+                <a href="#catalog">Чизкейки</a>
+                <a href="#catalog">Торты на заказ</a>
+            </div>
+        </div>
+        <div class="center">
+            <span>Покупателю</span>
+            <div>
+                <a href="#catalog">Доставка и самовывоз</a>
+                <a href="#catalog">Оплата</a>
+                <a href="#catalog">Вопросы и ответы</a>
+                <a href="#catalog">Отзывы</a>
+                <a href="#catalog">Статьи</a>
+            </div>
+        </div>
+        <div class="center">
+            <span>О кондитерской</span>
+            <div>
+                <a href="#catalog">О нас</a>
+                <a href="#catalog">Контакты</a>
+                <a href="#catalog">Политика конфиденциальности</a>
+                <a href="#catalog">Публичная оферта</a>
+            </div>
+        </div>
+    </div>
+    <div class="last">
+        <span>© 2026 Кондитерская «Lecrem». ИП Иванова А. А., ИНН 000000000000</span>
+        <span>ул. Пекарная, 12 · самовывоз</span>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: var(--color-plate);
+        margin-top:26px ;
+    }
+
+    footer .wrapper {
+        display: grid;
+        padding: 40px 40px 20px;
+        grid-template-columns: 3fr repeat(3, 2fr);
+        gap: 14px;
+    }
+
+    .wrapper .first {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .wrapper .first h2 {
+        font-weight:600;
+        font-size:18px;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+    }
+
+    .wrapper .first > a {
+        font-size:20px;
+        font-weight:600;
+        text-decoration:none;
+        font-feature-settings:'tnum' 1;
+        transition: color 0.2s;
+    }
+
+    .wrapper .first > a:hover {
+        color: var(--color-action);
+    }
+    
+    .wrapper .first span {
+        font-size:12px;
+        line-height:1.4;
+        color:#6B6B66;
+    }
+
+    .wrapper .first div {
+        display: flex;
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    .wrapper .first div a {
+        font-size: 16px;
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-color: black;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+        transition: color 0.1s, text-decoration-color 0.1s;
+    }
+
+    .wrapper .first div a:hover {
+        color: var(--color-action);
+        text-decoration-color: var(--color-action);
+    }
+
+    .wrapper .center {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .wrapper .center span {
+        font-size:12px;
+        font-weight:600;
+        letter-spacing:.12em;
+        text-transform:uppercase;
+        color:#6B6B66;
+        margin-bottom:4px;
+    }
+
+    .wrapper .center > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .wrapper .center > div a {
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-color: black;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+        transition: color 0.1s, text-decoration-color 0.1s;
+        font-weight: 400;
+        font-size: 15px;
+    }
+
+    .wrapper .center > div a:hover {
+        color: var(--color-action);
+        text-decoration-color: var(--color-action);
+    }
+
+    footer .last {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 2px solid var(--color-border);
+        padding: 18px 40px;
+    }
+
+    footer .last span {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--color-on-surface-muted)
+    }
+</style>

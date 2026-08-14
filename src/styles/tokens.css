@@ -1,0 +1,44 @@
+:root {
+  --color-primary: #141414;
+  --color-secondary: #6b6b66;
+  --color-neutral: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f6f6f1;
+  --color-plate: #f0f0ea;
+  --color-on-surface: #141414;
+  --color-on-surface-muted: #6b6b66;
+  --color-border: #dcdcd6;
+  --color-border-soft: #ecece6;
+  --color-border-strong: #141414;
+  --color-action: #1e5b3c;
+  --color-action-hover: #17492f;
+  --color-action-active: #103522;
+  --color-action-subtle: #e8f0ea;
+  --color-focus-ring: #1e5b3c;
+  --color-focus-ring-offset: #ffffff;
+  --color-error: #a32020;
+  --color-error-surface: #fbeded;
+  --color-success: #1e5b3c;
+  --color-success-surface: #e8f0ea;
+  --color-warning: #8a5a00;
+  --color-warning-surface: #fbf2e0;
+  --color-disabled: #b4b4ae;
+  --color-disabled-surface: #f0f0ea;
+  --color-scletet: #8A8A82;
+  --spacing-base: 4px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 56px;
+  --spacing-gutter: 24px;
+  --spacing-margin: 32px;
+  --spacing-margin-mobile: 16px;
+  --spacing-section: 56px;
+  --spacing-section-mobile: 40px;
+  --spacing-content-max: 1390px;
+  --rounded-none: 0px;
+}
+

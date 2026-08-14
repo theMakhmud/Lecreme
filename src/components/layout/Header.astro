@@ -1,0 +1,83 @@
+
+
+<header>
+    <div class="container">
+
+        <a href="/" class="logo">Lecrem</a>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="/category/">Каталог</a></li>
+                <li><a href="/delivery/">Доставка</a></li>
+                <li><a href="/payment/">Оплата</a></li>
+                <li><a href="/about/">О нас</a></li>
+                <li><a href="/contacts/">Контакты</a></li>
+            </ul>
+        </nav>
+
+        <a href="/cart/" class="cart">
+            Корзина · 0
+        </a>
+    </div>
+</header>
+
+<style>
+    header {
+        position: fixed;
+        background-color: #fff;
+        padding: 16px 0;
+        width: 100%;
+    }
+
+    .container {
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
+        max-width: var(--spacing-content-max);
+        padding: 0 40px;
+    }
+
+    .logo {
+        color: var(--color-primary);
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+    nav ul li a {
+        padding: 6px 0;
+        display: inline-block;
+        color: var(--color-action);
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.12em;
+        transition: .3s;
+        text-transform: uppercase;
+        border-bottom: 2px solid transparent;
+    }
+
+    nav ul li a:hover {
+        border-bottom-color: var(--color-action);
+    }
+
+    .container .cart {
+        background-color: transparent;
+        padding: 8px 16px;
+        border: solid 1px var(--color-border);
+        color: var(--color-on-surface-muted);
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    @media (max-width: 768px) {
+        nav { display: none; } /* временно, до бургер-меню */
+    }
+</style>

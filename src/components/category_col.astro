@@ -1,0 +1,85 @@
+---
+import categories from '../data/category.json';
+---
+
+<section class="categories">
+    <h2>Категории</h2>
+    <ul class="category_grid">
+        {categories.map((catig) => (
+            <li>
+                <article class="category">
+                    <a href={`/category/${catig.path?.toLowerCase()}`}>
+                        <div class="thumb"></div>
+                        <div class="meta">
+                            <h3>{catig.title}</h3>
+                            <p>{catig.product_list.length}</p>
+                        </div>
+                    </a>
+                </article>
+            </li>
+        ))}
+    </ul>
+</section>
+
+
+<style>
+    .categories {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 30px 40px;
+    }
+
+    .categories .category_grid {
+        display: flex;
+        justify-content: start;
+        gap: 16px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .category_grid > li {
+        display: flex;
+        flex: 0 1 228px;
+    }
+
+    .category_grid .category {
+        display: flex;
+        flex: 1;
+    }
+
+    .category_grid .category > a {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        text-decoration: none;
+        color: inherit;
+        border: 1px solid var(--color-border);
+        cursor: pointer;
+    }
+
+    .category_grid .category .thumb {
+        aspect-ratio: 4 / 3;
+        background-color: var(--color-border-soft);
+    }
+
+    .category_grid .category .meta {
+        padding: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            color: var(--color-border-strong);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-on-surface-muted);
+        }
+    }
+</style>

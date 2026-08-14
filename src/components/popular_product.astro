@@ -1,0 +1,155 @@
+---
+import products from '../data/products.json';
+import categories from '../data/category.json';
+
+const popul_product_list = [2,4,7,1,3,9,6,10,8]
+
+const popularProducts = popul_product_list
+    .map((id) => products.find((p) => p.id === id))
+    .filter((p): p is (typeof products)[number] => Boolean(p))
+    .slice(0, 8)
+
+function category(category_id: (typeof products)[number]) {
+    return categories?.find((categ) => categ.id === category_id.category_id)?.path?.toLowerCase()
+}
+
+
+// if (window.innerWidth >= 1275) {
+//     popularProducts.slice(0, 8)
+// }
+
+
+function saleType(product: (typeof products)[number]) {
+    const variant = product.variants[0];
+    if ("price_per_100g" in variant) {
+        return `от ${variant.price_per_100g}`;
+    }
+    return `${variant.price} сум`;
+}
+---
+
+<section class="popular_category">
+    <div class="head">
+        <h2>Популярное</h2>
+        <a href="/category/">
+            Весь каталог
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+        </a>
+    </div>
+    <ul class="product_cards">
+        {popularProducts?.map( (product) => (
+            <li>
+                <article class="card">
+                    <a href={`/category/${category(product)}/${product?.path.toLowerCase()}`}>
+                        <div class="photo"></div>
+                        <div class="info">
+                            <h3>{product?.title}</h3>
+                            <div>
+                                <p>Цена</p>
+                                <span>
+                                    {saleType(product)}
+                                </span>
+                            </div>
+                            <div>
+                                <p>Срок</p>
+                                <span>{product?.variants[0].active_minutes} часов</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </li>
+        ))}
+    </ul>
+
+</section>
+
+<style>
+    .popular_category {
+        padding: 30px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .popular_category .head {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            display: flex;
+            align-items: center;
+            color: var(--color-action);
+            font-size: 16px;
+            font-weight: 600;
+            gap: 8px;
+        }
+    }
+
+    .popular_category .product_cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 16px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .popular_category .product_cards > li {
+        display: flex;
+    }
+
+    .popular_category .product_cards .card {
+        cursor: pointer;
+        display: flex;
+        flex: 1;
+        border: 1px solid var(--color-border-soft);
+    }
+
+    .popular_category .product_cards .card > a {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        text-decoration: none;
+        color: inherit;
+
+        .photo {
+            aspect-ratio: 1 / 1;
+            background-color: var(--color-plate);;
+        }
+
+        .info {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+
+            h3 {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            > div {
+                display: flex;
+                justify-content: space-between;
+
+                p {
+                    color: var(--color-on-surface-muted);
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                span {
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .popular_category .product_cards {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+</style>

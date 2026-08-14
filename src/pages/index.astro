@@ -1,11 +1,390 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Base.astro';
+import Hero from '../components/hero.astro';
+import Categoty_col from '../components/category_col.astro';
+import Popular_product from '../components/popular_product.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+    title={"Lecreme — торты, чизкейки и десерты на заказ"}
+    description={"Торты, чизкейки, пирожные и булочки готовим под ваш заказ — без склада и предзаготовок. Выбирайте удобную дату получения при оформлении. Принимаем индивидуальные торты по вашему ТЗ."}
+    keywords={"торт на заказ, заказать торт, чизкейк на заказ, десерты на заказ, пирожные на заказ, булочки на заказ, торт по индивидуальному заказу, кондитерская"}>
+    <div class="wrapper">
+        <Hero />
+        <Categoty_col />
+        <Popular_product />
+
+        <section class="custom_order">
+            <div class="text">
+                <span>Индивидуальный заказ</span>
+                <h2>Торт по вашему техническому заданию</h2>
+                <p>Ярусы, вес, начинка, надпись, цветы, фигурки, корпоративная символика. Такой торт не кладётся в корзину: сначала обсуждаем задачу и дату, затем считаем стоимость и фиксируем её в заявке.</p>
+                <div>
+                    <div>
+                        <p>Срок</p>
+                        <span>от 72 часов</span>
+                    </div>
+                    <div>
+                        <p>Вес</p>
+                        <span>от 3 кг</span>
+                    </div>
+                    <div>
+                        <p>Цена</p>
+                        <span>согласуется отдельно</span>
+                    </div>
+                </div>
+                <a href="/custom_order">
+                    Оставить заявку
+                </a>
+            </div>
+            <div class="photo">
+
+            </div>
+
+            <div class="wrapper">
+                
+            </div>
+        </section>
+
+        <section class="work_info">
+            <h2>Как это работает</h2>
+            <div class="info_cards">
+                <div>
+                    <span>Шаг 1</span>
+                    <h3>Выбираете десерт</h3>
+                    <p>Складываете в корзину то, что нужно. У каждой позиции указан свой срок изготовления.</p>
+                </div>
+                <div>
+                    <span>Шаг 2</span>
+                    <h3>Выбираете свободную дату</h3>
+                    <p>Показываем только те дни и часы, которые производство успевает: по самому долгому товару в корзине и загрузке дня.</p>
+                </div>
+                <div>
+                    <span>Шаг 3</span>
+                    <h3>Забираете в назначенное время</h3>
+                    <p>Звоним, подтверждаем дату и время. К этому моменту заказ уже готов — забираете в точке выдачи.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reviews">
+            <h2>Отзывы</h2>
+            <div class="reviews-grid">
+                <figure>
+                    <blockquote>«Заказывала медовик на день рождения мамы за два дня. Позвонили, подтвердили время, к 10 утра всё было готово. Забрала за пять минут.»</blockquote>
+                    <figcaption>Анна К. · заказ от 12 марта</figcaption>
+                </figure>
+                <figure>
+                    <blockquote>«Брали 40 капкейков на выпуск в школе. Сделали за один день, привезли в коробках по 6 штук — ничего не смазалось.»</blockquote>
+                    <figcaption>Дмитрий С. · заказ от 28 мая</figcaption>
+                </figure>
+                <figure>
+                    <blockquote>«Свадебный торт обсуждали неделю: ярусы, начинка, декор. Итоговую смету прислали до оплаты, в день свадьбы всё совпало с эскизом.»</blockquote>
+                    <figcaption>Мария и Павел · заказ от 3 августа</figcaption>
+                </figure>
+            </div>
+        </section>
+        
+        <section class="articles">
+            <div class="head">
+                <h2>Статьи</h2>
+                <a href="">
+                    Все статьи
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+                </a>
+            </div>
+            <div class="article_grid">
+                <div>
+                    <div class="img">
+
+                    </div>
+                    <div class="text">
+                        <span>Выбор торта</span>
+                        <h3 style="">Как рассчитать вес торта на 10, 20 и 50 человек</h3>
+                        <p style="">Простая таблица: сколько граммов на гостя, если торт — единственный десерт и если есть другая выпечка.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="img">
+
+                    </div>
+                    <div class="text">
+                        <span>Выбор торта</span>
+                        <h3 style="">Как рассчитать вес торта на 10, 20 и 50 человек</h3>
+                        <p style="">Простая таблица: сколько граммов на гостя, если торт — единственный десерт и если есть другая выпечка.</p>
+                    </div>
+                </div>
+                    <div>
+                        <div class="img">
+
+                        </div>
+                        <div class="text">
+                            <span>Выбор торта</span>
+                            <h3 style="">Как рассчитать вес торта на 10, 20 и 50 человек</h3>
+                            <p style="">Простая таблица: сколько граммов на гостя, если торт — единственный десерт и если есть другая выпечка.</p>
+                        </div>
+                    </div>
+            </div>
+        </section>
+    </div>
 </Layout>
+
+<style>
+    > .wrapper {
+        display: flex;
+        flex-direction: column;
+        padding-top: 70px;
+    }
+
+    .custom_order {
+        padding: 20px 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .custom_order .photo {
+        background-color: var(--color-plate);
+    }
+
+    .custom_order .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 30px 70px 30px 30px;
+        border: 1px solid var(--color-border);
+    }
+
+    .custom_order .text > span {
+        font-size:11px;
+        font-weight:600;
+        letter-spacing:.12em;
+        text-transform:uppercase;
+        color:#141414
+    }
+
+    .custom_order .text h2 {
+        font-size: clamp(30px, 8vw + 10px, 44px);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+    }
+
+    .custom_order .text p {
+        font-size:16px;
+        line-height:1.55;
+        color:#454540;
+        max-width:460px;
+        text-wrap:pretty;
+    }
+
+    .custom_order .text > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 0;
+    }
+
+    .custom_order .text > div div {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        span {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-on-surface-muted);
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-border-strong);
+        }
+    }
+
+    .custom_order .text a {
+        width: 150px;
+        text-align: center;
+        padding: 14px 18px;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: var(--color-action);
+        color: white;
+    }
+
+    .work_info {
+        padding: 30px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .work_info .info_cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+
+    .work_info .info_cards div {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 25px;
+        border-top: 1px solid var(--color-border);
+        border-right: 1px solid var(--color-border);
+    }
+
+    .work_info .info_cards div:last-child {
+        border-right: none;
+    }
+
+    .work_info .info_cards div:first-child {
+        padding-left: 0;
+    }
+
+    .info_cards div span {
+        font-size:13px;
+        font-weight:600;
+        letter-spacing:.12em;
+        text-transform:uppercase;
+        color:var(--color-on-surface-muted);
+    }
+
+    .info_cards div h3 {
+        font-size: clamp(16px, 8vw + 10px, 20px);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+    }
+
+    .info_cards div p {
+        font-size:16px;
+        line-height:1.55;
+        color:#454540;
+        max-width:460px;
+        text-wrap:pretty;
+        font-weight: 400;
+    }
+
+    .reviews {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 0px 40px 20px;
+    }
+
+    .reviews h2 {
+        font-size: 26px;
+        font-weight: 600;
+        color: var(--color-border-strong);
+    }
+
+    .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .reviews-grid figure {
+        border: 1px solid var(--color-border);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 14px;
+    }
+
+    .reviews-grid figure blockquote {
+        margin:0;
+        font-size:16px;
+        line-height:1.55;
+        text-wrap:pretty;
+    }
+
+    .reviews-grid figure figcaption {
+        font-size:12px;
+        line-height:1.4;
+        color:#6B6B66;
+        border-top:1px solid #ECECE6;
+        padding-top:8px;
+    }
+
+    .articles {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 20px 40px;
+    }
+
+    .articles .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .articles .head h2 {
+        font-size:24px;
+        letter-spacing:-0.01em;
+        font-weight:600;
+    }
+
+    .articles .head a {
+        display: flex;
+        align-items: center;
+        color: var(--color-action);
+        font-size: 16px;
+        font-weight: 600;
+        gap: 8px;
+    }
+
+    .articles .article_grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    .article_grid > div {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--color-border)
+    }
+
+    .article_grid div .img {
+        background-color: var(--color-plate);
+        aspect-ratio: 16 / 9;
+    }
+
+    .article_grid div .text {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .article_grid div .text span {
+        color: var(--color-on-surface-muted);
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .article_grid div .text h3 {
+        font-size:17px;
+        font-weight:600;
+        line-height:1.3;
+    }
+    .article_grid div .text p {
+        font-size:14px;
+        line-height:1.5;
+        color:#454540;
+    }
+
+
+
+    @media (max-width: 768px) {
+        .wrapper {
+            padding-top: 72px;
+        }
+    }
+</style>

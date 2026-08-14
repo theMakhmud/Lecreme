@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "Пирожные",
+        "product_list": [1, 3, 8],
+        "path": "Pirozhnyye"
+    },
+    {
+        "id": 2,
+        "title": "Десерты",
+        "product_list": [4, 6, 9],
+        "path": "Deserty"
+    },
+    {
+        "id": 3,
+        "title": "Булочки",
+        "product_list": [2, 5, 7],
+        "path": "Bulochki"
+    },
+    {
+        "id": 4,
+        "title": "Чизкейки",
+        "product_list": [10],
+        "   ": "Chizkeyki"
+    }
+]

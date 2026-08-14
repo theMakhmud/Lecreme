@@ -1,0 +1,142 @@
+---
+---
+
+<section class="hero" aria-labelledby="hero-title">
+    <div class="info">
+        <span>Производство под заказ</span>
+        <h1 id="hero-title">Всё готовится под заказ. Дату получения выбираете вы.</h1>
+        <p>Мы не держим готовых остатков. Вы собираете заказ, система показывает свободные даты — с учётом срока изготовления и загрузки производства.</p>
+        <div class="button">
+            <a href="#catalog" class="btn btn-primary">Перейти в каталог</a>
+            <a href="#how" class="btn btn-secondary">Свободные даты</a>
+        </div>
+        <div class="facts">
+            <div class="fact">
+                <div class="fact-value">от 5 часов</div>
+                <div class="fact-label">минимальный срок</div>
+            </div>
+            <div class="fact">
+                <div class="fact-value">14 дней</div>
+                <div class="fact-label">горизонт записи</div>
+            </div>
+            <div class="fact">
+                <div class="fact-value">по телефону</div>
+                <div class="fact-label">подтверждаем каждый заказ</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="img"></div>
+</section>
+
+<style>
+    .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid var(--color-border);
+    }
+
+    .hero .img {
+        background-color: var(--color-plate);;
+    }
+
+    .hero .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        justify-content: center;
+        padding: 20px 40px;
+        gap: 24px;
+    }
+
+    .hero .info span {
+        font-size:11px;
+        font-weight:600;
+        letter-spacing:.12em;
+        text-transform:uppercase;
+        color:#141414;
+    }
+
+    .hero .info h1 {
+        font-size: clamp(30px, 8vw + 10px, 44px);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+
+    }
+
+    .hero .info p {
+        font-size:16px;
+        line-height:1.55;
+        color:#454540;
+        max-width:460px;
+        text-wrap:pretty;
+    }
+
+    .btn {
+        padding: 0 24px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        box-sizing: border-box;
+        transition: .3s;
+    }
+
+    .button {
+        display: flex;
+        gap: 14px;
+    }
+
+    .btn-primary {
+        background: var(--color-action);
+        color: var(--color-neutral);
+    }
+    .btn-primary:hover {
+        background: var(--color-action-hover, #17492F);
+    }
+
+    .btn-secondary {
+        border: 1px solid var(--color-primary);
+        background: transparent;
+    }
+    .btn-secondary:hover {
+        background: var(--color-surface-muted);
+    }
+    .facts {
+        width: auto;
+        display: flex;
+        margin-top: var(--spacing-lg, 24px);
+    }
+
+    .fact:first-child { padding-left: 0; }
+    .fact:last-child { padding-right: 0; border-right: none; }
+
+    .fact {
+        padding: 16px 24px;
+        border-right: 1px solid var(--color-border);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .fact-value {
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 1.3;
+        font-feature-settings: "tnum" 1;
+    }
+
+    .fact-label {
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--color-on-surface-muted);
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

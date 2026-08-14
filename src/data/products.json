@@ -1,0 +1,197 @@
+[
+    {
+        "id": 1,
+        "category_id": 1,
+        "title": "Пирожное \"Наполеон\"",
+        "path": "napoleon",
+        "description": "Слоёное тесто с заварным кремом, классика.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "poshtuchno",
+                "label": "1 шт",
+                "price": 45000,
+                "active_minutes": 20,
+                "chill_minutes": 60
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "category_id": 3,
+        "title": "Круассан с миндалём",
+        "path": "croissant-almond",
+        "description": "Слоёный круассан с миндальной начинкой и лепестками.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "poshtuchno",
+                "label": "1 шт",
+                "price": 32000,
+                "active_minutes": 15,
+                "chill_minutes": 30
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "category_id": 1,
+        "title": "Пирожное \"Медовик\"",
+        "path": "medovik",
+        "description": "Медовые коржи со сметанным кремом.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "poshtuchno",
+                "label": "1 шт",
+                "price": 48000,
+                "active_minutes": 25,
+                "chill_minutes": 90
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "category_id": 2,
+        "title": "Тирамису",
+        "path": "tiramisu",
+        "description": "Классический итальянский десерт с маскарпоне и кофе.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "poshtuchno",
+                "label": "порция",
+                "price": 55000,
+                "active_minutes": 20,
+                "chill_minutes": 120
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "category_id": 3,
+        "title": "Синнабон классический",
+        "path": "cinnabon",
+        "description": "Булочка с корицей и кремовой глазурью.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "poshtuchno",
+                "label": "1 шт",
+                "price": 38000,
+                "active_minutes": 15,
+                "chill_minutes": 20
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "category_id": 2,
+        "title": "Ассорти пирожных на вес",
+        "path": "assorti-na-ves",
+        "description": "Микс мини-пирожных, продаётся на развес.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "po_vesu",
+                "label": "на развес",
+                "price_per_100g": 23000,
+                "min_grams": 300,
+                "max_grams": 2000,
+                "step_grams": 100,
+                "active_minutes": 30,
+                "chill_minutes": 60
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "category_id": 3,
+        "title": "Круассан классический",
+        "path": "croissant-classic",
+        "description": "Слоёный круассан на сливочном масле.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "poshtuchno",
+                "label": "1 шт",
+                "price": 28000,
+                "active_minutes": 12,
+                "chill_minutes": 25
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "category_id": 1,
+        "title": "Пирожное \"Картошка\"",
+        "path": "kartoshka",
+        "description": "Бисквитная крошка с какао и коньячной пропиткой.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "poshtuchno",
+                "label": "1 шт",
+                "price": 30000,
+                "active_minutes": 15,
+                "chill_minutes": 40
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "category_id": 2,
+        "title": "Профитроли",
+        "path": "profiteroles",
+        "description": "Заварные пирожные с кремом, подаются порцией из пяти штук.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "poshtuchno",
+                "label": "порция · 5 шт",
+                "price": 42000,
+                "active_minutes": 25,
+                "chill_minutes": 45
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "category_id": 4,
+        "title": "Чизкейк классический Нью-Йорк",
+        "path": "cheesecake-new-york",
+        "description": "Плотный чизкейк на песочной основе, без начинки сверху.",
+        "variants": [
+            {
+                "id": 1,
+                "sale_type": "tselikom_razmerami",
+                "label": "15 см",
+                "diameter_cm": 15,
+                "serves": "4–6 человек",
+                "price": 320000,
+                "active_minutes": 40,
+                "chill_minutes": 480
+            },
+            {
+                "id": 2,
+                "sale_type": "tselikom_razmerami",
+                "label": "20 см",
+                "diameter_cm": 20,
+                "serves": "6–8 человек",
+                "price": 420000,
+                "active_minutes": 45,
+                "chill_minutes": 480
+            },
+            {
+                "id": 3,
+                "sale_type": "tselikom_razmerami",
+                "label": "25 см",
+                "diameter_cm": 25,
+                "serves": "10–12 человек",
+                "price": 540000,
+                "active_minutes": 55,
+                "chill_minutes": 540
+            }
+        ]
+    }
+]

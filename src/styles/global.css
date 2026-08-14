@@ -1,0 +1,11 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-golos);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
