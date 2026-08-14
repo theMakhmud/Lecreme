@@ -48,22 +48,24 @@ import Popular_product from '../components/popular_product.astro';
         </section>
 
         <section class="work_info">
-            <h2>Как это работает</h2>
-            <div class="info_cards">
-                <div>
-                    <span>Шаг 1</span>
-                    <h3>Выбираете десерт</h3>
-                    <p>Складываете в корзину то, что нужно. У каждой позиции указан свой срок изготовления.</p>
-                </div>
-                <div>
-                    <span>Шаг 2</span>
-                    <h3>Выбираете свободную дату</h3>
-                    <p>Показываем только те дни и часы, которые производство успевает: по самому долгому товару в корзине и загрузке дня.</p>
-                </div>
-                <div>
-                    <span>Шаг 3</span>
-                    <h3>Забираете в назначенное время</h3>
-                    <p>Звоним, подтверждаем дату и время. К этому моменту заказ уже готов — забираете в точке выдачи.</p>
+            <div class="work_info_inner">
+                <h2>Как это работает</h2>
+                <div class="info_cards">
+                    <div>
+                        <span>Шаг 1</span>
+                        <h3>Выбираете десерт</h3>
+                        <p>Складываете в корзину то, что нужно. У каждой позиции указан свой срок изготовления.</p>
+                    </div>
+                    <div>
+                        <span>Шаг 2</span>
+                        <h3>Выбираете свободную дату</h3>
+                        <p>Показываем только те дни и часы, которые производство успевает: по самому долгому товару в корзине и загрузке дня.</p>
+                    </div>
+                    <div>
+                        <span>Шаг 3</span>
+                        <h3>Забираете в назначенное время</h3>
+                        <p>Звоним, подтверждаем дату и время. К этому моменту заказ уже готов — забираете в точке выдачи.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -131,10 +133,10 @@ import Popular_product from '../components/popular_product.astro';
 </Layout>
 
 <style>
-    > .wrapper {
+    .wrapper {
         display: flex;
         flex-direction: column;
-        padding-top: 70px;
+        gap: 30px;
     }
 
     .custom_order {
@@ -216,7 +218,17 @@ import Popular_product from '../components/popular_product.astro';
     }
 
     .work_info {
-        padding: 30px 40px;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        background-color: var(--color-action);
+        color: white;
+    }
+
+    .work_info_inner {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 30px var(--padding-side);
         display: flex;
         flex-direction: column;
         gap: 18px;
@@ -233,8 +245,8 @@ import Popular_product from '../components/popular_product.astro';
         flex-direction: column;
         gap: 12px;
         padding: 25px;
-        border-top: 1px solid var(--color-border);
-        border-right: 1px solid var(--color-border);
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        border-right: 1px solid rgba(255, 255, 255, 0.18);
     }
 
     .work_info .info_cards div:last-child {
@@ -250,7 +262,7 @@ import Popular_product from '../components/popular_product.astro';
         font-weight:600;
         letter-spacing:.12em;
         text-transform:uppercase;
-        color:var(--color-on-surface-muted);
+        color:rgba(255, 255, 255, 0.7);
     }
 
     .info_cards div h3 {
@@ -264,7 +276,7 @@ import Popular_product from '../components/popular_product.astro';
     .info_cards div p {
         font-size:16px;
         line-height:1.55;
-        color:#454540;
+        color:rgba(255, 255, 255, 0.85);
         max-width:460px;
         text-wrap:pretty;
         font-weight: 400;

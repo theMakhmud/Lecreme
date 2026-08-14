@@ -1,17 +1,268 @@
 ---
 import Layout from '../../layouts/Base.astro';
+import categories from '../../data/category.json';
+import products from '../../data/products.json';
 
+const poshtuchno = products.filter((v) => v.variants[0].sale_type == "poshtuchno").map((v) => {
+    const variant = v.variants[0];
+    return "price" in variant ? variant.price : null
+}).filter((p): p is number => p !== null);
+
+const po_vesu = products.filter((v) => v.variants[0].sale_type == "po_vesu").map((v) => {
+    const variant = v.variants[0];
+    return "price_per_100g" in variant ? variant.price_per_100g : null
+}).filter((p): p is number => p !== null);
+
+const tselikom = products.filter((v) => v.variants[0].sale_type == "tselikom_razmerami").map((v) => {
+    const variant = v.variants[0];
+    return "price" in variant ? variant.price : null
+}).filter((p): p is number => p !== null);
+
+console.log(poshtuchno)
+
+const minPrice = Math.min(...poshtuchno, ...po_vesu, ...tselikom)
+const maxPrice = Math.max(...poshtuchno, ...po_vesu, ...tselikom)
 ---
 
 <Layout title={"category"}>
     <div class="wrapper">
-        <h1>Category Page</h1>
+        <aside class="tab_bar">
+            <form method="get" action="/catalog/">
+                <fieldset class="cat_filter">
+                    <legend class="nav_title">Категории</legend>
+                    <ul>
+                        {categories.map((category) => (
+                            <li>
+                                <label class="cat_item">
+                                    <input type="checkbox" name="category" value={category.id} />
+                                    <span class="name">{category.title}</span>
+                                    <span class="length">{products.filter( (p) => p.category_id === category.id).length}</span>
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+                </fieldset>
+
+                <fieldset class="price_filter">
+                    <legend class="nav_title">Цена</legend>
+                    <div class="range" data-range>
+                        <div class="range__track"></div>
+                        <div class="range__fill"></div>
+                        <input class="first" type="range" name="price_min" min={minPrice} max={maxPrice} value={minPrice} step="1000" data-min />
+                        <input class="second" type="range" name="price_max" min={minPrice} max={maxPrice} value={maxPrice} step="1000" data-max />
+                    </div>
+                    <div class="range_input">
+                        <input type="number" inputmode="numeric" placeholder="от">
+                        <p>—</p>
+                        <input type="number" inputmode="numeric" placeholder="до">
+                    </div>
+                    <div class="range__values">
+                        <span data-min-label>{minPrice}</span> сум — <span data-max-label>{maxPrice}</span> сум
+                    </div>
+                </fieldset>
+            </form>
+        </aside>
+        <section class="product grid">
+            
+        </section>
     </div>
 </Layout>
 
 
 <style>
     .wrapper {
-        padding-top: 70px;
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+    }
+
+    .nav_title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--color-on-surface-muted);
+        padding-bottom: 6px;
+        border-bottom:1px solid var(--color-border);
+    }
+
+    .tab_bar {
+        border-right: 1px solid var(--color-border) ;
+        padding: 25px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    fieldset {
+        border: none;
+    }
+
+    legend {
+        width: 100%;
+    }
+
+    .cat_filter {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cat_filter ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .cat_item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .cat_item .name {
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--color-border-strong);
+    }
+
+    .cat_item .length {
+        margin-left: auto;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--color-on-surface-muted);
+    }
+
+    .price_filter {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .range {
+        --min-percent: 0%;
+        --max-percent: 100%;
+        position: relative;
+        height: 28px;
+        margin-top: 14px;
+    }
+
+
+    .range__track,
+    .range__fill {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 4px;
+        border-radius: 2px;
+    }
+
+    .range__track {
+        left: 0;
+        right: 0;
+        background: var(--color-border);
+    }
+
+    .range__fill {
+        left: var(--min-percent);
+        right: calc(100% - var(--max-percent));
+        background: var(--color-action);
+    }
+
+    .range_input {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .range_input input {
+        width: 33%;
+        padding: 10px;
+        border: 1px solid var(--color-border-soft);
+        font-size: 14px;
+    }
+
+
+    .range input[type="range"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: none;
+        -webkit-appearance: none;
+        appearance: none;
+        pointer-events: none;
+    }
+
+    .range input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        pointer-events: auto;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--color-action);
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px var(--color-border);
+        cursor: pointer;
+    }
+    .range input[type="range"]::-moz-range-thumb {
+        pointer-events: auto;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--color-action);
+        border: 2px solid #fff;
+        cursor: pointer;
+    }
+
+    .range__values {
+        font-size: 14px;
+        color: var(--color-on-surface-muted);
     }
 </style>
+
+<script is:inline>
+    document.querySelectorAll('[data-range]').forEach((range) => {
+        const minInput = range.querySelector('[data-min]');
+        const maxInput = range.querySelector('[data-max]');
+        const minLabel = range.parentElement.querySelector('[data-min-label]');
+        const maxLabel = range.parentElement.querySelector('[data-max-label]');
+
+        const rangeMin = Number(minInput.min);
+        const rangeMax = Number(maxInput.max);
+        const gap = 0;
+
+        const toPercent = (value) =>
+            ((value - rangeMin) / (rangeMax - rangeMin)) * 100;
+
+        const update = () => {
+            let minVal = Number(minInput.value);
+            let maxVal = Number(maxInput.value);
+
+            if (minVal > maxVal - gap) {
+                if (document.activeElement === minInput) {
+                    minVal = maxVal - gap;
+                    minInput.value = String(minVal);
+                } else {
+                    maxVal = minVal + gap;
+                    maxInput.value = String(maxVal);
+                }
+            }
+
+            range.style.setProperty('--min-percent', toPercent(minVal) + '%');
+            range.style.setProperty('--max-percent', toPercent(maxVal) + '%');
+            minLabel.textContent = String(minVal);
+            maxLabel.textContent = String(maxVal);
+        };
+
+        minInput.addEventListener('input', update);
+        maxInput.addEventListener('input', update);
+        update();
+    });
+</script>
