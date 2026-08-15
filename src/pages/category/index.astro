@@ -18,8 +18,6 @@ const tselikom = products.filter((v) => v.variants[0].sale_type == "tselikom_raz
     return "price" in variant ? variant.price : null
 }).filter((p): p is number => p !== null);
 
-console.log(poshtuchno)
-
 const minPrice = Math.min(...poshtuchno, ...po_vesu, ...tselikom)
 const maxPrice = Math.max(...poshtuchno, ...po_vesu, ...tselikom)
 ---
@@ -34,7 +32,7 @@ const maxPrice = Math.max(...poshtuchno, ...po_vesu, ...tselikom)
                         {categories.map((category) => (
                             <li>
                                 <label class="cat_item">
-                                    <input type="checkbox" name="category" value={category.id} />
+                                    <input class="cat_input" type="checkbox" name="category" value={category.id} />
                                     <span class="name">{category.title}</span>
                                     <span class="length">{products.filter( (p) => p.category_id === category.id).length}</span>
                                 </label>
@@ -45,19 +43,22 @@ const maxPrice = Math.max(...poshtuchno, ...po_vesu, ...tselikom)
 
                 <fieldset class="price_filter">
                     <legend class="nav_title">Цена</legend>
-                    <div class="range" data-range>
-                        <div class="range__track"></div>
-                        <div class="range__fill"></div>
-                        <input class="first" type="range" name="price_min" min={minPrice} max={maxPrice} value={minPrice} step="1000" data-min />
-                        <input class="second" type="range" name="price_max" min={minPrice} max={maxPrice} value={maxPrice} step="1000" data-max />
+                    <div class="range">
+                        <input data-min-range type="range" step="1000" min={minPrice} max={maxPrice}>
+                        <input data-max-range type="range" step="1000" min={minPrice} max={maxPrice}>
+                        <div class="slider">
+                            <div data-progress class="progress">
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="range_input">
-                        <input type="number" inputmode="numeric" placeholder="от">
-                        <p>—</p>
-                        <input type="number" inputmode="numeric" placeholder="до">
-                    </div>
-                    <div class="range__values">
-                        <span data-min-label>{minPrice}</span> сум — <span data-max-label>{maxPrice}</span> сум
+
+                    <div class="price_wrapper">
+                        <div class="range_input">
+                            <input data-min-input type="number" min={minPrice} max={maxPrice} placeholder="от">
+                            <input data-max-input type="number" min={minPrice} max={maxPrice} placeholder="до">
+                        </div>
+                        <span>{minPrice} сум — {maxPrice} сум</span>
                     </div>
                 </fieldset>
             </form>
@@ -112,7 +113,7 @@ const maxPrice = Math.max(...poshtuchno, ...po_vesu, ...tselikom)
         display: flex;
         flex-direction: column;
         gap: 10px;
-        margin-top: 10px;
+        margin-top: 14px;
     }
 
     .cat_item {
@@ -136,133 +137,188 @@ const maxPrice = Math.max(...poshtuchno, ...po_vesu, ...tselikom)
         color: var(--color-on-surface-muted);
     }
 
+    .range_input {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .range_input input {
+        padding: 8px 10px;
+        font-size: 16px;
+        color: var(--color-on-surface);
+        border: 1px solid var(--color-border);
+        transition: .2s;
+    }
+
+    .range_input input:focus-visible {
+        outline: 2px solid var(--color-action);
+        border-radius: 10px;
+    }
+
+    .cat_input {
+        appearance: none;
+        -webkit-appearance: none;
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        border: 1px solid var(--color-border);
+        border-radius: 5px;
+        display: grid;
+        place-content: center;
+        cursor: pointer;
+        transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .cat_input::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        transform: scale(0);
+        transform-origin: center;
+        transition: transform 0.15s ease;
+        background: #fff;
+        clip-path: polygon(14% 44%, 0 65%, 43% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+
+    .cat_input:hover {
+        border-color: var(--color-action);
+    }
+
+    .cat_input:checked {
+        background: var(--color-action);
+        border-color: var(--color-action-active);
+    }
+
+    .cat_input:checked::before {
+        transform: scale(1);
+    }
+
+    .cat_input:focus-visible {
+        outline: 2px solid var(--color-action);
+        outline-offset: 2px;
+    }
+
     .price_filter {
         display: flex;
         flex-direction: column;
         gap: 16px;
     }
 
+    .price_wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .price_wrapper span {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--color-focus-ring);
+    }
+
     .range {
-        --min-percent: 0%;
-        --max-percent: 100%;
+        display: grid;
         position: relative;
-        height: 28px;
         margin-top: 14px;
     }
 
+    .range input {
+        grid-row: 2;
+        grid-column: 1;
+        pointer-events: none;
+        appearance: none;
+        background: transparent;
+    }
 
-    .range__track,
-    .range__fill {
+    .range input::-webkit-slider-thumb {
+        pointer-events: auto;
+        appearance: none;
+
+        width: 14px;
+        height: 14px;
+        background-color: var(--color-surface-muted);
+        outline: 2px solid var(--color-focus-ring);
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .range input::-webkit-slider-thumb {
+
+    }
+
+    .slider {
         position: absolute;
+        height: 6px;
+        width: 100%;
+        background-color: var(--color-action-subtle);
         top: 50%;
         transform: translateY(-50%);
-        height: 4px;
-        border-radius: 2px;
+        z-index: -1;
+        border-radius: 3px;
+        overflow: hidden;
     }
 
-    .range__track {
-        left: 0;
-        right: 0;
-        background: var(--color-border);
-    }
-
-    .range__fill {
-        left: var(--min-percent);
-        right: calc(100% - var(--max-percent));
-        background: var(--color-action);
-    }
-
-    .range_input {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .range_input input {
-        width: 33%;
-        padding: 10px;
-        border: 1px solid var(--color-border-soft);
-        font-size: 14px;
-    }
-
-
-    .range input[type="range"] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
+    .progress {
         height: 100%;
-        margin: 0;
-        background: none;
-        -webkit-appearance: none;
-        appearance: none;
-        pointer-events: none;
+        background-color: var(--color-action);
+        position: absolute;
     }
 
-    .range input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        pointer-events: auto;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: var(--color-action);
-        border: 2px solid #fff;
-        box-shadow: 0 0 0 1px var(--color-border);
-        cursor: pointer;
-    }
-    .range input[type="range"]::-moz-range-thumb {
-        pointer-events: auto;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: var(--color-action);
-        border: 2px solid #fff;
-        cursor: pointer;
-    }
-
-    .range__values {
-        font-size: 14px;
-        color: var(--color-on-surface-muted);
+    .range input.active {
+        z-index: 10;
     }
 </style>
 
 <script is:inline>
-    document.querySelectorAll('[data-range]').forEach((range) => {
-        const minInput = range.querySelector('[data-min]');
-        const maxInput = range.querySelector('[data-max]');
-        const minLabel = range.parentElement.querySelector('[data-min-label]');
-        const maxLabel = range.parentElement.querySelector('[data-max-label]');
+    const slider = document.querySelector(".price_filter")
+    const progress = slider.querySelector('[data-progress]')
+    const minRange = slider.querySelector('[data-min-range]')
+    const maxRange = slider.querySelector('[data-max-range]')
+    const minInput = slider.querySelector('[data-min-input]')
+    const maxInput = slider.querySelector('[data-max-input]')
 
-        const rangeMin = Number(minInput.min);
-        const rangeMax = Number(maxInput.max);
-        const gap = 0;
+    const minPrice = Number(minRange.min)
+    const maxPrice = Number(maxRange.max)
 
-        const toPercent = (value) =>
-            ((value - rangeMin) / (rangeMax - rangeMin)) * 100;
+    const gap = 1000
 
-        const update = () => {
-            let minVal = Number(minInput.value);
-            let maxVal = Number(maxInput.value);
+    minRange.value = minPrice
+    maxRange.value = maxPrice
 
-            if (minVal > maxVal - gap) {
-                if (document.activeElement === minInput) {
-                    minVal = maxVal - gap;
-                    minInput.value = String(minVal);
-                } else {
-                    maxVal = minVal + gap;
-                    maxInput.value = String(maxVal);
-                }
-            }
+    const toPercent = (value) => {
+        return (value - minPrice) / (maxPrice - minPrice) * 100
+    }
 
-            range.style.setProperty('--min-percent', toPercent(minVal) + '%');
-            range.style.setProperty('--max-percent', toPercent(maxVal) + '%');
-            minLabel.textContent = String(minVal);
-            maxLabel.textContent = String(maxVal);
-        };
+    const render = () => {
+        const low = Math.min(Number(minRange.value), Number(maxRange.value))
+        const high = Math.max(Number(minRange.value), Number(maxRange.value))
 
-        minInput.addEventListener('input', update);
-        maxInput.addEventListener('input', update);
-        update();
-    });
+        minInput.value = low > minPrice ? low : ""
+        maxInput.value = high < maxPrice ? high : ""
+
+        progress.style.left = toPercent(low) + "%"
+        progress.style.right = (100 - toPercent(high)) + "%"
+    }
+
+    minRange.addEventListener("input", () => {
+        render()
+    })
+
+    maxRange.addEventListener("input", () => {
+        render()
+    })
+
+    for (const range of [minRange, maxRange]) {
+        range.addEventListener("pointerdown", () => {
+            range.classList.add("active")
+        })
+    }
+
+    document.addEventListener("pointerup", () => {
+        minRange.classList.remove("active")
+        maxRange.classList.remove("active")
+    })
+
+    render()
 </script>
