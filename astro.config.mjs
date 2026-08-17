@@ -1,5 +1,7 @@
 import { defineConfig, fontProviders } from "astro/config";
 
+import react from "@astrojs/react";
+
 export default defineConfig({
   fonts: [{
     provider: fontProviders.google(),
@@ -8,4 +10,6 @@ export default defineConfig({
     weights: [400, 500, 600],
     subsets: ["latin", "cyrillic"],
   }],
+
+  integrations: [react()],
 });

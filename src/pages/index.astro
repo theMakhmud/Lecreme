@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Base.astro';
-import Hero from '../components/hero.astro';
-import Categoty_col from '../components/category_col.astro';
-import Popular_product from '../components/popular_product.astro';
+import Hero from '../components/home/Hero.astro';
+import CategoryList from '../components/home/CategoryList.astro';
+import PopularProducts from '../components/home/PopularProducts.astro';
 
 ---
 
@@ -12,8 +12,8 @@ import Popular_product from '../components/popular_product.astro';
     keywords={"торт на заказ, заказать торт, чизкейк на заказ, десерты на заказ, пирожные на заказ, булочки на заказ, торт по индивидуальному заказу, кондитерская"}>
     <div class="wrapper">
         <Hero />
-        <Categoty_col />
-        <Popular_product />
+        <CategoryList />
+        <PopularProducts />
 
         <section class="custom_order">
             <div class="text">
