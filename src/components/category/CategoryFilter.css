@@ -63,38 +63,22 @@ legend {
     appearance: none;
     -webkit-appearance: none;
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-    display: grid;
-    place-content: center;
-    cursor: pointer;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
+    height: 100%;
+    transition: .3s;
 }
 
-.cat_input::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    transform: scale(0);
-    transform-origin: center;
-    transition: transform 0.15s ease;
-    background: #fff;
-    clip-path: polygon(14% 44%, 0 65%, 43% 100%, 100% 16%, 80% 0%, 43% 62%);
+.cat_input:checked, .cat_input:hover {
+    margin-right: 8px;
+    border-right: 2px solid var(--color-border-strong);
 }
 
-.cat_input:hover {
-    border-color: var(--color-action);
-}
-
-.cat_input:checked {
-    background: var(--color-action);
-    border-color: var(--color-action-active);
-}
 
 .cat_input:checked::before {
     transform: scale(1);
+}
+
+.cat_input:checked ~ .name, .cat_input:hover ~ .name {
+    font-weight: 600;
 }
 
 .cat_input:focus-visible {

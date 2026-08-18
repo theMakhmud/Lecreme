@@ -1,10 +1,27 @@
 import { useEffect, useState } from 'react'
-import '..//category/CategoryFilter.css'
+import { useSearchParams } from 'react-router-dom';
+import '../category/CategoryFilter.css'
 
 const CategoryFilter = ({ products, categories, minPrice, maxPrice }) => {
     const [minValue, setMinValue] = useState(minPrice)
     const [maxValue, setMaxValue] = useState(maxPrice)
     const [activeThumb, setActiveThumb] = useState(null)
+
+    const [searchParams, setSearchParams] = useSearchParams({ category: '' });
+
+    const togglePath = (id) => {
+        const newParams = new URLSearchParams(searchParams);
+        
+        newParams.set('category', id);
+        setSearchParams(newParams);
+    };
+
+
+    // const toggleCat = (id) => {
+    //     setActiveCat((prev) =>
+    //         prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
+    //     )
+    // }
 
     const low = Math.min(minValue, maxValue)
     const high = Math.max(minValue, maxValue)
@@ -25,7 +42,7 @@ const CategoryFilter = ({ products, categories, minPrice, maxPrice }) => {
                     <ul>
                         <li>
                             <label className="cat_item">
-                                <input className="cat_input" type="checkbox" name="category" value="" />
+                                <input className="cat_input" type="checkbox" name="category" value="" checked={searchParams.pathname === '/catalog/'} onChange={() => togglePath([])} />
                                 <span className="name">Все товары</span>
                                 <span className="length">{products.length}</span>
                             </label>
@@ -33,7 +50,7 @@ const CategoryFilter = ({ products, categories, minPrice, maxPrice }) => {
                         {categories.map((category) => (
                             <li key={category.id}>
                                 <label className="cat_item">
-                                    <input className="cat_input" type="checkbox" name="category" value={category.id} />
+                                    <input className="cat_input" type="checkbox" name="category" value={category.id} checked={searchParams.includes(category.id)} onChange={() => togglePath(category.id)} />
                                     <span className="name">{category.title}</span>
                                     <span className="length">{products.filter((p) => p.category_id === category.id).length}</span>
                                 </label>

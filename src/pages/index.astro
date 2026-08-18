@@ -4,6 +4,31 @@ import Hero from '../components/home/Hero.astro';
 import CategoryList from '../components/home/CategoryList.astro';
 import PopularProducts from '../components/home/PopularProducts.astro';
 
+import { getCollection } from 'astro:content';
+import { priceType } from "../lib/price"
+
+import type { CollectionEntry } from 'astro:content';
+
+const categories  = await getCollection('categories')
+const products  = await getCollection('products')
+
+
+// interface Props {
+//     category: CollectionEntry<'categories'>
+// }
+
+function categoryLength(category: (typeof categories)[number]) {
+    return (products.filter((p) => p.data.category_id == category.data.id).length)
+}
+
+function category(product: (typeof products)[number]) {
+    return (categories.find((c) => c.data.id == product.data.category_id))
+}
+
+const popular = products.filter(p => p.data.is_popular)
+
+
+
 ---
 
 <Layout
@@ -11,9 +36,87 @@ import PopularProducts from '../components/home/PopularProducts.astro';
     description={"Торты, чизкейки, пирожные и булочки готовим под ваш заказ — без склада и предзаготовок. Выбирайте удобную дату получения при оформлении. Принимаем индивидуальные торты по вашему ТЗ."}
     keywords={"торт на заказ, заказать торт, чизкейк на заказ, десерты на заказ, пирожные на заказ, булочки на заказ, торт по индивидуальному заказу, кондитерская"}>
     <div class="wrapper">
-        <Hero />
-        <CategoryList />
-        <PopularProducts />
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="info">
+                <span>Производство под заказ</span>
+                <h1 id="hero-title">Всё готовится под заказ. Дату получения выбираете вы.</h1>
+                <p>Мы не держим готовых остатков. Вы собираете заказ, система показывает свободные даты — с учётом срока изготовления и загрузки производства.</p>
+                <div class="button">
+                    <a href="#catalog" class="btn btn-primary">Перейти в каталог</a>
+                    <a href="#how" class="btn btn-secondary">Свободные даты</a>
+                </div>
+                <div class="facts">
+                    <div class="fact">
+                        <div class="fact-value">от 5 часов</div>
+                        <div class="fact-label">минимальный срок</div>
+                    </div>
+                    <div class="fact">
+                        <div class="fact-value">14 дней</div>
+                        <div class="fact-label">горизонт записи</div>
+                    </div>
+                    <div class="fact">
+                        <div class="fact-value">по телефону</div>
+                        <div class="fact-label">подтверждаем каждый заказ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="img"></div>
+        </section>
+
+        <section class="categories">
+            <h2>Категории</h2>
+            <ul class="category_grid">
+                {categories.map((category) => (
+                    <li>
+                        <article class="category">
+                            <a href={`/category/${category.data.path?.toLowerCase()}`}>
+                                <div class="thumb"></div>
+                                <div class="meta">
+                                    <h3>{category.data.title}</h3>
+                                    <p>{categoryLength(category)}</p>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                ))}
+            </ul>
+        </section>
+
+        <section class="popular_category">
+            <div class="head">
+                <h2>Популярное</h2>
+                <a href="/category/">
+                    Весь каталог
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+                </a>
+            </div>
+            <ul class="product_cards">
+                {popular.map( (product) => (
+                    <li>
+                        <article class="card">
+                            <a href={`/category/${category(product)?.data.path.toLowerCase()}/${product?.data.path.toLowerCase()}`}>
+                                <div class="photo"></div>
+                                <div class="info">
+                                    <h3>{product?.data.title}</h3>
+                                    <div>
+                                        <p>Цена</p>
+                                        <span>
+                                            {priceType(product.data)}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <p>Срок</p>
+                                        <span>{product?.data.variants[0].active_minutes} часов</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                ))}
+            </ul>
+
+        </section>
 
         <section class="custom_order">
             <div class="text">
@@ -131,6 +234,272 @@ import PopularProducts from '../components/home/PopularProducts.astro';
         </section>
     </div>
 </Layout>
+
+<style>
+    .popular_category {
+        padding: 30px var(--padding-side);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .popular_category .head {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            display: flex;
+            align-items: center;
+            color: var(--color-action);
+            font-size: 16px;
+            font-weight: 600;
+            gap: 8px;
+        }
+    }
+
+    .popular_category .product_cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 16px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .popular_category .product_cards > li {
+        display: flex;
+    }
+
+    .popular_category .product_cards .card {
+        cursor: pointer;
+        display: flex;
+        flex: 1;
+        border: 1px solid var(--color-border-soft);
+    }
+
+    .popular_category .product_cards .card > a {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        text-decoration: none;
+        color: inherit;
+
+        .photo {
+            aspect-ratio: 1 / 1;
+            background-color: var(--color-plate);;
+        }
+
+        .info {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+
+            h3 {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            > div {
+                display: flex;
+                justify-content: space-between;
+
+                p {
+                    color: var(--color-on-surface-muted);
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                span {
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .popular_category .product_cards {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+
+    .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* border: 1px solid var(--color-border); */
+        padding: 20px var(--padding-side);
+        gap: 20px;
+    }
+
+    .hero .img {
+        background-color: var(--color-plate);;
+    }
+
+    .hero .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .hero .info span {
+        font-size:11px;
+        font-weight:600;
+        letter-spacing:.12em;
+        text-transform:uppercase;
+        color:#141414;
+    }
+
+    .hero .info h1 {
+        font-size: clamp(30px, 8vw + 10px, 44px);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+
+    }
+
+    .hero .info p {
+        font-size:16px;
+        line-height:1.55;
+        color:#454540;
+        max-width:460px;
+        text-wrap:pretty;
+    }
+
+    .btn {
+        padding: 0 24px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        box-sizing: border-box;
+        transition: .3s;
+    }
+
+    .button {
+        display: flex;
+        gap: 14px;
+    }
+
+    .btn-primary {
+        background: var(--color-action);
+        color: var(--color-neutral);
+    }
+    .btn-primary:hover {
+        background: var(--color-action-hover, #17492F);
+    }
+
+    .btn-secondary {
+        border: 1px solid var(--color-primary);
+        background: transparent;
+    }
+    .btn-secondary:hover {
+        background: var(--color-surface-muted);
+    }
+    .facts {
+        width: auto;
+        display: flex;
+        margin-top: var(--spacing-lg, 24px);
+    }
+
+    .fact:first-child { padding-left: 0; }
+    .fact:last-child { padding-right: 0; border-right: none; }
+
+    .fact {
+        padding: 16px 24px;
+        border-right: 1px solid var(--color-border);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .fact-value {
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 1.3;
+        font-feature-settings: "tnum" 1;
+    }
+
+    .fact-label {
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--color-on-surface-muted);
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+
+<style>
+    .categories {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 10px var(--padding-side);
+    }
+
+    .categories .category_grid {
+        display: flex;
+        justify-content: start;
+        gap: 16px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .category_grid > li {
+        display: flex;
+        flex: 0 1 228px;
+    }
+
+    .category_grid .category {
+        display: flex;
+        flex: 1;
+    }
+
+    .category_grid .category > a {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        text-decoration: none;
+        color: inherit;
+        border: 1px solid var(--color-border);
+        cursor: pointer;
+    }
+
+    .category_grid .category .thumb {
+        aspect-ratio: 4 / 3;
+        background-color: var(--color-border-soft);
+    }
+
+    .category_grid .category .meta {
+        padding: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            color: var(--color-border-strong);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-on-surface-muted);
+        }
+    }
+</style>
 
 <style>
     .wrapper {
