@@ -105,7 +105,7 @@ const CategoryFilter = ({ products, categories, minPrice, maxPrice, selected, on
                                 onBlur={commitPrice}
                             />
                         </div>
-                        <span>{minPrice} сум — {maxPrice} сум</span>
+                        <span>{minPrice.toLocaleString('ru-RU')} — {maxPrice.toLocaleString('ru-RU')} сум</span>
                     </div>
                 </fieldset>
             </form>

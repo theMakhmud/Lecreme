@@ -5,6 +5,17 @@
     font-family: var(--font-golos);
 }
 
+body {
+    background-color: var(--color-paper);
+    color: var(--color-primary);
+}
+
+h1,
+h2 {
+    font-family: var(--font-prata), Georgia, serif;
+    font-weight: 400;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -13,4 +24,16 @@ a {
 li {
     list-style: none;
     display: flex;
+}
+
+/* числа как «данные»: цены, сроки, счётчики */
+.mono {
+    font-family: var(--font-mono), Menlo, monospace;
+    font-feature-settings: "tnum" 1;
+}
+
+/* перфорация «производственного талона» */
+.perf {
+    height: 1px;
+    background-image: repeating-linear-gradient(90deg, var(--color-border) 0 6px, transparent 6px 12px);
 }

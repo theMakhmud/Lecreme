@@ -2,7 +2,8 @@
     cursor: pointer;
     display: flex;
     flex: 1;
-    border: 1px solid var(--color-border-soft);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
 }
 
 .card > a {
@@ -19,7 +20,7 @@
 }
 
 .card .info {
-    padding: 10px;
+    padding: 14px 16px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -31,24 +32,28 @@
     font-weight: 600;
 }
 
-.card .info > div {
+.card .info .row {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 }
 
-.card .info > div p {
+.card .info .row p {
     color: var(--color-on-surface-muted);
-    font-size: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.card .info .row span.mono {
+    font-size: 15px;
     font-weight: 600;
 }
 
-.card .info > div span {
-    font-size: 16px;
-    font-weight: 600;
+.card .info .row .stamp {
     display: flex;
-    align-items: end;
-    gap: 8px;
-}
-.card .info > div span p {
-    color: var(--color-disabled);
+    align-items: center;
+    gap: 6px;
+    color: var(--color-stamp);
 }

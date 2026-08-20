@@ -123,40 +123,49 @@ const popular = products.filter(p => p.data.is_popular)
         <section class="work_info">
             <div class="work_info_inner">
                 <h2>Как это работает</h2>
-                <div class="info_cards">
-                    <div>
-                        <span>Шаг 1</span>
-                        <h3>Выбираете десерт</h3>
-                        <p>Складываете в корзину то, что нужно. У каждой позиции указан свой срок изготовления.</p>
-                    </div>
-                    <div>
-                        <span>Шаг 2</span>
-                        <h3>Выбираете свободную дату</h3>
-                        <p>Показываем только те дни и часы, которые производство успевает: по самому долгому товару в корзине и загрузке дня.</p>
-                    </div>
-                    <div>
-                        <span>Шаг 3</span>
-                        <h3>Забираете в назначенное время</h3>
-                        <p>Звоним, подтверждаем дату и время. К этому моменту заказ уже готов — забираете в точке выдачи.</p>
-                    </div>
-                </div>
+                <ol class="info_cards">
+                    <li>
+                        <span class="step_num" aria-hidden="true">01</span>
+                        <div class="step_body">
+                            <h3>Выбираете десерт</h3>
+                            <p>Складываете в корзину то, что нужно. У каждой позиции указан свой срок изготовления.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step_num" aria-hidden="true">02</span>
+                        <div class="step_body">
+                            <h3>Выбираете свободную дату</h3>
+                            <p>Показываем только те дни и часы, которые производство успевает: по самому долгому товару в корзине и загрузке дня.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step_num" aria-hidden="true">03</span>
+                        <div class="step_body">
+                            <h3>Забираете в назначенное время</h3>
+                            <p>Звоним, подтверждаем дату и время. К этому моменту заказ уже готов — забираете в точке выдачи.</p>
+                        </div>
+                    </li>
+                </ol>
             </div>
         </section>
 
         <section class="reviews">
             <h2>Отзывы</h2>
             <div class="reviews-grid">
-                <figure>
-                    <blockquote>«Заказывала медовик на день рождения мамы за два дня. Позвонили, подтвердили время, к 10 утра всё было готово. Забрала за пять минут.»</blockquote>
-                    <figcaption>Анна К. · заказ от 12 марта</figcaption>
+                <figure class="featured">
+                    <span class="quote" aria-hidden="true">«</span>
+                    <blockquote>Свадебный торт обсуждали неделю: ярусы, начинка, декор. Итоговую смету прислали до оплаты, в день свадьбы всё совпало с эскизом.</blockquote>
+                    <figcaption><b>Мария и Павел</b><span>заказ · 3 августа</span></figcaption>
                 </figure>
                 <figure>
-                    <blockquote>«Брали 40 капкейков на выпуск в школе. Сделали за один день, привезли в коробках по 6 штук — ничего не смазалось.»</blockquote>
-                    <figcaption>Дмитрий С. · заказ от 28 мая</figcaption>
+                    <span class="quote" aria-hidden="true">«</span>
+                    <blockquote>Заказывала медовик на день рождения мамы за два дня. Позвонили, подтвердили время, к 10 утра всё было готово.</blockquote>
+                    <figcaption><b>Анна К.</b><span>заказ · 12 марта</span></figcaption>
                 </figure>
                 <figure>
-                    <blockquote>«Свадебный торт обсуждали неделю: ярусы, начинка, декор. Итоговую смету прислали до оплаты, в день свадьбы всё совпало с эскизом.»</blockquote>
-                    <figcaption>Мария и Павел · заказ от 3 августа</figcaption>
+                    <span class="quote" aria-hidden="true">«</span>
+                    <blockquote>Брали 40 капкейков на выпуск в школе. Сделали за один день, привезли в коробках по 6 штук — ничего не смазалось.</blockquote>
+                    <figcaption><b>Дмитрий С.</b><span>заказ · 28 мая</span></figcaption>
                 </figure>
             </div>
         </section>
@@ -170,36 +179,37 @@ const popular = products.filter(p => p.data.is_popular)
                 </a>
             </div>
             <div class="article_grid">
-                <div>
-                    <div class="img">
-
-                    </div>
+                <a href="" class="article_featured">
+                    <div class="img"></div>
                     <div class="text">
                         <span>Выбор торта</span>
-                        <h3 style="">Как рассчитать вес торта на 10, 20 и 50 человек</h3>
-                        <p style="">Простая таблица: сколько граммов на гостя, если торт — единственный десерт и если есть другая выпечка.</p>
+                        <h3>Как рассчитать вес торта на 10, 20 и 50 человек</h3>
+                        <p>Простая таблица: сколько граммов на гостя, если торт — единственный десерт и если есть другая выпечка.</p>
                     </div>
-                </div>
-                <div>
-                    <div class="img">
-
-                    </div>
-                    <div class="text">
-                        <span>Выбор торта</span>
-                        <h3 style="">Как рассчитать вес торта на 10, 20 и 50 человек</h3>
-                        <p style="">Простая таблица: сколько граммов на гостя, если торт — единственный десерт и если есть другая выпечка.</p>
-                    </div>
-                </div>
-                    <div>
-                        <div class="img">
-
+                </a>
+                <div class="article_list">
+                    <a href="">
+                        <div>
+                            <span>Производство</span>
+                            <h3>Зачем торту «отстояться»: что происходит в холодильнике</h3>
                         </div>
-                        <div class="text">
-                            <span>Выбор торта</span>
-                            <h3 style="">Как рассчитать вес торта на 10, 20 и 50 человек</h3>
-                            <p style="">Простая таблица: сколько граммов на гостя, если торт — единственный десерт и если есть другая выпечка.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+                    </a>
+                    <a href="">
+                        <div>
+                            <span>Хранение</span>
+                            <h3>Сколько хранится чизкейк и как везти его летом</h3>
                         </div>
-                    </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+                    </a>
+                    <a href="">
+                        <div>
+                            <span>Размеры</span>
+                            <h3>Диаметр и персоны: как выбрать размер, чтобы хватило всем</h3>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
@@ -251,21 +261,22 @@ const popular = products.filter(p => p.data.is_popular)
     .hero {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        /* border: 1px solid var(--color-border); */
-        padding: 20px var(--padding-side);
-        gap: 20px;
+        border: 1px solid var(--color-border);
+        background-color: var(--color-surface);
+        margin: 20px var(--padding-side) 0;
     }
 
     .hero .img {
-        background-color: var(--color-plate);;
+        background-color: var(--color-plate);
+        border-left: 1px solid var(--color-border);
     }
 
     .hero .info {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         justify-content: center;
         gap: 24px;
+        padding: 48px;
     }
 
     .hero .info span {
@@ -278,11 +289,9 @@ const popular = products.filter(p => p.data.is_popular)
 
     .hero .info h1 {
         font-size: clamp(30px, 8vw + 10px, 44px);
-        font-weight: 600;
-        line-height: 1.12;
+        line-height: 1.18;
         letter-spacing: -0.01em;
         text-wrap: balance;
-
     }
 
     .hero .info p {
@@ -341,6 +350,7 @@ const popular = products.filter(p => p.data.is_popular)
     }
 
     .fact-value {
+        font-family: var(--font-mono), Menlo, monospace;
         font-weight: 600;
         font-size: 15px;
         line-height: 1.3;
@@ -395,12 +405,13 @@ const popular = products.filter(p => p.data.is_popular)
         text-decoration: none;
         color: inherit;
         border: 1px solid var(--color-border);
+        background-color: var(--color-surface);
         cursor: pointer;
     }
 
     .category_grid .category .thumb {
         aspect-ratio: 4 / 3;
-        background-color: var(--color-border-soft);
+        background-color: var(--color-plate);
     }
 
     .category_grid .category .meta {
@@ -416,7 +427,8 @@ const popular = products.filter(p => p.data.is_popular)
         }
 
         p {
-            font-size: 14px;
+            font-family: var(--font-mono), Menlo, monospace;
+            font-size: 13px;
             font-weight: 500;
             color: var(--color-on-surface-muted);
         }
@@ -447,6 +459,7 @@ const popular = products.filter(p => p.data.is_popular)
         gap: 16px;
         padding: 30px 70px 30px 30px;
         border: 1px solid var(--color-border);
+        background-color: var(--color-surface);
     }
 
     .custom_order .text > span {
@@ -458,9 +471,8 @@ const popular = products.filter(p => p.data.is_popular)
     }
 
     .custom_order .text h2 {
-        font-size: clamp(30px, 8vw + 10px, 44px);
-        font-weight: 600;
-        line-height: 1.12;
+        font-size: clamp(28px, 6vw + 8px, 36px);
+        line-height: 1.22;
         letter-spacing: -0.01em;
         text-wrap: balance;
     }
@@ -485,15 +497,17 @@ const popular = products.filter(p => p.data.is_popular)
         gap: 4px;
 
         span {
-            font-size: 14px;
+            font-family: var(--font-mono), Menlo, monospace;
+            font-feature-settings: "tnum" 1;
+            font-size: 15px;
             font-weight: 600;
-            color: var(--color-on-surface-muted);
+            color: var(--color-border-strong);
         }
 
         p {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--color-border-strong);
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--color-on-surface-muted);
         }
     }
 
@@ -512,8 +526,8 @@ const popular = products.filter(p => p.data.is_popular)
         width: 100vw;
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
-        background-color: var(--color-action);
-        color: white;
+        background-color: var(--color-plate);
+        color: var(--color-primary);
     }
 
     .work_info_inner {
@@ -531,46 +545,56 @@ const popular = products.filter(p => p.data.is_popular)
     }
 
 
-    .work_info .info_cards div {
+    .work_info .info_cards li {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        padding: 25px;
-        border-top: 1px solid rgba(255, 255, 255, 0.18);
-        border-right: 1px solid rgba(255, 255, 255, 0.18);
+        gap: 18px;
+        padding: 28px 25px;
+        border-top: 1px solid var(--color-border);
+        border-right: 1px solid var(--color-border);
     }
 
-    .work_info .info_cards div:last-child {
+    .work_info .info_cards li:last-child {
         border-right: none;
     }
 
-    .work_info .info_cards div:first-child {
+    .work_info .info_cards li:first-child {
         padding-left: 0;
     }
 
-    .info_cards div span {
-        font-size:13px;
-        font-weight:600;
-        letter-spacing:.12em;
-        text-transform:uppercase;
-        color:rgba(255, 255, 255, 0.7);
+    .info_cards .step_num {
+        font-family: var(--font-prata), Georgia, serif;
+        font-size: 44px;
+        line-height: 1;
+        color: var(--color-action);
+        font-weight: 600;
+        padding-bottom: 14px;
+        background-image: repeating-linear-gradient(90deg, var(--color-border) 0 6px, transparent 6px 12px);
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: 56px 1px;
     }
 
-    .info_cards div h3 {
-        font-size: clamp(16px, 8vw + 10px, 20px);
+    .step_body {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .step_body h3 {
+        font-size: 19px;
         font-weight: 600;
-        line-height: 1.12;
+        line-height: 1.2;
         letter-spacing: -0.01em;
         text-wrap: balance;
     }
 
-    .info_cards div p {
-        font-size:16px;
-        line-height:1.55;
-        color:rgba(255, 255, 255, 0.85);
-        max-width:460px;
-        text-wrap:pretty;
-        font-weight: 400;
+    .step_body p {
+        font-size: 15px;
+        line-height: 1.55;
+        color: var(--color-secondary);
+        max-width: 380px;
+        text-wrap: pretty;
     }
 
     .reviews {
@@ -582,38 +606,70 @@ const popular = products.filter(p => p.data.is_popular)
 
     .reviews h2 {
         font-size: 26px;
-        font-weight: 600;
         color: var(--color-border-strong);
     }
 
     .reviews-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1.4fr 1fr;
+        grid-auto-rows: 1fr;
         gap: 20px;
     }
 
     .reviews-grid figure {
         border: 1px solid var(--color-border);
-        padding: 20px;
+        background-color: var(--color-surface);
+        padding: 24px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        gap: 14px;
+        gap: 12px;
+    }
+
+    .reviews-grid .featured {
+        grid-row: span 2;
+        padding: 32px;
+    }
+
+    .reviews-grid .quote {
+        font-family: var(--font-prata), Georgia, serif;
+        font-size: 44px;
+        line-height: 0.6;
+        color: var(--color-primary);
     }
 
     .reviews-grid figure blockquote {
-        margin:0;
-        font-size:16px;
-        line-height:1.55;
-        text-wrap:pretty;
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.55;
+        text-wrap: pretty;
+        flex: 1;
+    }
+
+    .reviews-grid .featured blockquote {
+        font-size: 19px;
+        line-height: 1.5;
     }
 
     .reviews-grid figure figcaption {
-        font-size:12px;
-        line-height:1.4;
-        color:#6B6B66;
-        border-top:1px solid #ECECE6;
-        padding-top:8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        border-top: 1px dashed var(--color-border);
+        padding-top: 10px;
+    }
+
+    .reviews-grid figcaption b {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color-primary);
+    }
+
+    .reviews-grid figcaption span {
+        font-family: var(--font-mono), Menlo, monospace;
+        font-feature-settings: "tnum" 1;
+        font-size: 12px;
+        color: var(--color-on-surface-muted);
     }
 
     .articles {
@@ -632,7 +688,6 @@ const popular = products.filter(p => p.data.is_popular)
     .articles .head h2 {
         font-size:24px;
         letter-spacing:-0.01em;
-        font-weight:600;
     }
 
     .articles .head a {
@@ -646,41 +701,95 @@ const popular = products.filter(p => p.data.is_popular)
 
     .articles .article_grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 32px;
+        align-items: start;
     }
 
-    .article_grid > div {
+    .article_featured {
         display: flex;
         flex-direction: column;
-        border: 1px solid var(--color-border)
+        border: 1px solid var(--color-border);
+        background-color: var(--color-surface);
+        color: inherit;
     }
 
-    .article_grid div .img {
+    .article_featured .img {
         background-color: var(--color-plate);
         aspect-ratio: 16 / 9;
     }
 
-    .article_grid div .text {
-        padding: 16px;
+    .article_featured .text {
+        padding: 18px;
         display: flex;
         flex-direction: column;
         gap: 8px;
     }
-    .article_grid div .text span {
+
+    .article_featured .text span,
+    .article_list a span {
         color: var(--color-on-surface-muted);
-        font-size: 13px;
+        font-size: 11px;
         font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
     }
-    .article_grid div .text h3 {
-        font-size:17px;
-        font-weight:600;
-        line-height:1.3;
+
+    .article_featured .text h3 {
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.3;
     }
-    .article_grid div .text p {
-        font-size:14px;
-        line-height:1.5;
-        color:#454540;
+
+    .article_featured .text p {
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--color-secondary);
+    }
+
+    .article_featured:hover h3 {
+        color: var(--color-action);
+    }
+
+    .article_list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article_list a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 0;
+        border-bottom: 1px dashed var(--color-border);
+        color: inherit;
+    }
+
+    .article_list a:first-child {
+        padding-top: 4px;
+    }
+
+    .article_list a > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .article_list a h3 {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.35;
+        transition: color .2s;
+    }
+
+    .article_list a svg {
+        flex-shrink: 0;
+        color: var(--color-action);
+    }
+
+    .article_list a:hover h3 {
+        color: var(--color-action);
     }
 
 

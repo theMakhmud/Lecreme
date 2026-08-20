@@ -22,20 +22,22 @@
 }
 .head span h1 {
     font-size: 40px;
-    font-weight: 600;
 }
 .head span p {
     padding-bottom: 6px;
-    font-size: 14px ;
-    font-weight: 400;
-    color: var(--color-disabled)
+    font-family: var(--font-mono), Menlo, monospace;
+    font-feature-settings: "tnum" 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-on-surface-muted);
 }
 .head > p {
     font-size: 16px;
-    font-weight: 500;
-    color: var(--color-paragroph);
-    padding: 0 20px;
-    border-left: 2px solid var(--color-action);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--color-on-surface-muted);
+    max-width: 640px;
+    text-wrap: pretty;
 }
 
 .row {
@@ -46,7 +48,9 @@
 }
 
 .row p {
-    font-size: 16px;
+    font-family: var(--font-mono), Menlo, monospace;
+    font-feature-settings: "tnum" 1;
+    font-size: 14px;
     font-weight: 600;
     color: var(--color-primary)
 }
@@ -60,25 +64,33 @@
 .sort span {
     color: var(--color-on-surface-muted);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .sort button {
-    color: var(--color-on-surface-muted);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
-    color: var(--color-disabled);
+    color: var(--color-on-surface-muted);
     background: transparent;
     border: none;
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 4px;
     cursor: pointer;
-    transition:  .3s;
+    transition: .3s;
+}
+
+.sort button:hover {
+    color: var(--color-primary);
+    text-decoration-color: var(--color-primary);
 }
 
 .sort .active {
     color: var(--color-action);
     font-weight: 600;
+    text-decoration-color: var(--color-action);
 }
 
 .product_cards {

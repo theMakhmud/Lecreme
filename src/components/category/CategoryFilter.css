@@ -1,9 +1,11 @@
 .nav_title {
-    font-size: 16px;
+    font-size: 11px;
     font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--color-on-surface-muted);
-    padding-bottom: 6px;
-    border-bottom:1px solid var(--color-border);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .tab_bar {
@@ -57,8 +59,10 @@ legend {
 
 .cat_item .length {
     margin-left: auto;
-    font-size: 14px;
-    font-weight: 400;
+    font-family: var(--font-mono), Menlo, monospace;
+    font-feature-settings: "tnum" 1;
+    font-size: 13px;
+    font-weight: 500;
     color: var(--color-on-surface-muted);
 }
 
@@ -66,13 +70,33 @@ legend {
     appearance: none;
     -webkit-appearance: none;
     flex-shrink: 0;
-    height: 100%;
-    transition: .3s;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.cat_input::before {
+    content: "";
+    width: 10px;
+    height: 8px;
+    transform: scale(0);
+    transition: transform 0.15s ease;
+    background: var(--color-neutral);
+    clip-path: polygon(14% 44%, 0 65%, 43% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.cat_input:hover {
+    border-color: var(--color-action);
 }
 
 .cat_input:checked {
-    margin-right: 8px;
-    border-right: 2px solid var(--color-border-strong);
+    background-color: var(--color-action);
+    border-color: var(--color-action);
 }
 
 
@@ -100,16 +124,24 @@ legend {
 }
 
 .range_input input {
-    padding: 8px 10px;
-    font-size: 16px;
-    color: var(--color-secondary);
+    width: 45%;
+    padding: 10px 12px;
+    font-family: var(--font-mono), Menlo, monospace;
+    font-feature-settings: "tnum" 1;
+    font-size: 14px;
+    color: var(--color-primary);
+    background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     transition: .2s;
 }
 
+.range_input input::placeholder {
+    color: var(--color-on-surface-muted);
+    font-family: var(--font-golos);
+}
+
 .range_input input:focus-visible {
     outline: 2px solid var(--color-action);
-    border-radius: 10px;
 }
 
 
@@ -126,9 +158,11 @@ legend {
 }
 
 .price_wrapper span {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--color-focus-ring);
+    font-family: var(--font-mono), Menlo, monospace;
+    font-feature-settings: "tnum" 1;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-on-surface-muted);
 }
 
 .range {
@@ -149,11 +183,11 @@ legend {
     pointer-events: auto;
     appearance: none;
 
-    width: 14px;
-    height: 14px;
-    background-color: var(--color-surface-muted);
-    outline: 2px solid var(--color-focus-ring);
-    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-paper);
+    outline: 2px solid var(--color-action);
+    border-radius: 0;
     cursor: pointer;
 }
 
@@ -163,13 +197,12 @@ legend {
 
 .slider {
     position: absolute;
-    height: 6px;
+    height: 4px;
     width: 100%;
-    background-color: var(--color-action-subtle);
+    background-color: var(--color-border-soft);
     top: 50%;
     transform: translateY(-50%);
     z-index: -1;
-    border-radius: 3px;
     overflow: hidden;
 }
 

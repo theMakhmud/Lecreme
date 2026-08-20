@@ -6,6 +6,8 @@ description: >
   Один гротеск, плотная линейная сетка, данные заказа как таблица.
   Зелёный акцент — исключительно для действий.
 colors:
+  paper: "#FAF9F6"
+  stamp: "#A6432E"
   primary: "#141414"
   secondary: "#6B6B66"
   neutral: "#FFFFFF"
