@@ -3,24 +3,37 @@ import Layout from '../../layouts/Base.astro';
 import categories from '../../data/category.json';
 import products from '../../data/products.json';
 
-import Catalog from '../../components/category/Catalog';
+import CategoryFilter from '../../components/category/CategoryFilter';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.jsx';
 import { getPriceRange } from '../../lib/price';
 
-// Границы цены по всему каталогу — для ползунка.
 const { minPrice, maxPrice } = getPriceRange(products);
+
+const breadcrumbs = [
+    { label: 'Главная', href: '/' },
+    { label: 'Каталог', href: '/catalog/' },
+];
 ---
 
 <Layout title={"catalog"}>
-    <!--
-        client:only="react" — остров не рендерится на сервере, только в браузере.
-        Это осознанно: данные (и фильтр из URL) целиком клиентские, а серверного
-        рендера здесь всё равно нет. Позже products/categories заменяются на запрос к Appwrite.
-    -->
-    <Catalog
-        client:only="react"
-        products={products}
-        categories={categories}
-        minPrice={minPrice}
-        maxPrice={maxPrice}
-    />
+    <div class="wrapper">
+        <CategoryFilter client:load products={products} categories={categories} minPrice={minPrice} maxPrice={maxPrice} />
+        <section class="product_grid">
+            <div class="routing">
+
+            </div>
+        </section>
+    </div>
 </Layout>
+
+
+<style>
+    .wrapper {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+    }
+
+    .product_grid {
+        padding: 14px 30px;
+    }
+</style>

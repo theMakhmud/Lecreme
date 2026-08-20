@@ -1,61 +1,48 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom';
 import '../category/CategoryFilter.css'
 
-// Презентационный сайдбар: состояние ему приходит из props (из Catalog),
-// а наверх он сообщает через колбэки onToggleCat / onSelectAll / onPriceChange.
-const CategoryFilter = ({
-    products,
-    categories,
-    minPrice,
-    maxPrice,
-    selected,        // выбранные категории (из URL)
-    min,             // текущая мин. цена (из URL)
-    max,             // текущая макс. цена (из URL)
-    onToggleCat,
-    onSelectAll,
-    onPriceChange,
-}) => {
-    // Локальный state только ради плавного движения ползунка.
-    const [minValue, setMinValue] = useState(min)
-    const [maxValue, setMaxValue] = useState(max)
+const CategoryFilter = ({ products, categories, minPrice, maxPrice }) => {
+    const [minValue, setMinValue] = useState(minPrice)
+    const [maxValue, setMaxValue] = useState(maxPrice)
     const [activeThumb, setActiveThumb] = useState(null)
 
-    // Если фильтр поменялся снаружи (назад/вперёд, сброс) — подтягиваем значения.
-    useEffect(() => setMinValue(min), [min])
-    useEffect(() => setMaxValue(max), [max])
+    const [searchParams, setSearchParams] = useSearchParams({ category: '' });
+
+    const togglePath = (id) => {
+        const newParams = new URLSearchParams(searchParams);
+        
+        newParams.set('category', id);
+        setSearchParams(newParams);
+    };
+
+
+    // const toggleCat = (id) => {
+    //     setActiveCat((prev) =>
+    //         prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
+    //     )
+    // }
 
     const low = Math.min(minValue, maxValue)
     const high = Math.max(minValue, maxValue)
+
     const toPercent = (value) => ((value - minPrice) / (maxPrice - minPrice)) * 100
 
-    // Цену «коммитим» наверх (в URL) только когда отпустили ползунок / ушли из поля.
-    const commitPrice = () => onPriceChange(low, high)
-
     useEffect(() => {
-        const onUp = () => {
-            if (activeThumb) {
-                setActiveThumb(null)
-                commitPrice()
-            }
-        }
-        window.addEventListener('pointerup', onUp)
-        return () => window.removeEventListener('pointerup', onUp)
-    }, [activeThumb, low, high])
+        const clear = () => setActiveThumb(null)
+        window.addEventListener('pointerup', clear)
+        return () => window.removeEventListener('pointerup', clear)
+    }, [])
 
     return (
         <aside className="tab_bar">
-            <form onSubmit={(e) => { e.preventDefault(); commitPrice() }}>
+            <form method="get" action="/catalog/">
                 <fieldset className="cat_filter">
                     <legend className="nav_title">Категории</legend>
                     <ul>
                         <li>
                             <label className="cat_item">
-                                <input
-                                    className="cat_input"
-                                    type="checkbox"
-                                    checked={selected.length === 0}
-                                    onChange={onSelectAll}
-                                />
+                                <input className="cat_input" type="checkbox" name="category" value="" checked={searchParams.pathname === '/catalog/'} onChange={() => togglePath([])} />
                                 <span className="name">Все товары</span>
                                 <span className="length">{products.length}</span>
                             </label>
@@ -63,12 +50,7 @@ const CategoryFilter = ({
                         {categories.map((category) => (
                             <li key={category.id}>
                                 <label className="cat_item">
-                                    <input
-                                        className="cat_input"
-                                        type="checkbox"
-                                        checked={selected.includes(category.id)}
-                                        onChange={() => onToggleCat(category.id)}
-                                    />
+                                    <input className="cat_input" type="checkbox" name="category" value={category.id} checked={searchParams.includes(category.id)} onChange={() => togglePath(category.id)} />
                                     <span className="name">{category.title}</span>
                                     <span className="length">{products.filter((p) => p.category_id === category.id).length}</span>
                                 </label>
@@ -115,18 +97,16 @@ const CategoryFilter = ({
                                 min={minPrice}
                                 max={maxPrice}
                                 placeholder="от"
-                                value={minValue}
+                                value={low > minPrice ? low : ''}
                                 onChange={(e) => setMinValue(Number(e.target.value))}
-                                onBlur={commitPrice}
                             />
                             <input
                                 type="number"
                                 min={minPrice}
                                 max={maxPrice}
                                 placeholder="до"
-                                value={maxValue}
+                                value={high < maxPrice ? high : ''}
                                 onChange={(e) => setMaxValue(Number(e.target.value))}
-                                onBlur={commitPrice}
                             />
                         </div>
                         <span>{minPrice} сум — {maxPrice} сум</span>
