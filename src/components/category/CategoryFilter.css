@@ -9,6 +9,9 @@
 .tab_bar {
     border-right: 1px solid var(--color-border) ;
     padding: 25px;
+    position: sticky;
+    top: 70px;
+    align-self: start;
 }
 
 form {
@@ -67,7 +70,7 @@ legend {
     transition: .3s;
 }
 
-.cat_input:checked, .cat_input:hover {
+.cat_input:checked {
     margin-right: 8px;
     border-right: 2px solid var(--color-border-strong);
 }
@@ -77,8 +80,12 @@ legend {
     transform: scale(1);
 }
 
-.cat_input:checked ~ .name, .cat_input:hover ~ .name {
+.cat_input:checked ~ .name {
     font-weight: 600;
+}
+
+.cat_item:hover .name {
+    color: var(--color-primary);
 }
 
 .cat_input:focus-visible {

@@ -1,48 +1,42 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom';
 import '../category/CategoryFilter.css'
 
-const CategoryFilter = ({ products, categories, minPrice, maxPrice }) => {
-    const [minValue, setMinValue] = useState(minPrice)
-    const [maxValue, setMaxValue] = useState(maxPrice)
+const CategoryFilter = ({ products, categories, minPrice, maxPrice, selected, onToggle, onSelectAll, onSetPrice, min, max }) => {
+    const [minValue, setMinValue] = useState(min)
+    const [maxValue, setMaxValue] = useState(max)
     const [activeThumb, setActiveThumb] = useState(null)
 
-    const [searchParams, setSearchParams] = useSearchParams({ category: '' });
+    useEffect(() => setMinValue(min), [min])
+    useEffect(() => setMaxValue(max), [max])
 
-    const togglePath = (id) => {
-        const newParams = new URLSearchParams(searchParams);
-        
-        newParams.set('category', id);
-        setSearchParams(newParams);
-    };
-
-
-    // const toggleCat = (id) => {
-    //     setActiveCat((prev) =>
-    //         prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
-    //     )
-    // }
 
     const low = Math.min(minValue, maxValue)
     const high = Math.max(minValue, maxValue)
 
     const toPercent = (value) => ((value - minPrice) / (maxPrice - minPrice)) * 100
 
+    const commitPrice = () => onSetPrice(low, high)
+
     useEffect(() => {
-        const clear = () => setActiveThumb(null)
-        window.addEventListener('pointerup', clear)
-        return () => window.removeEventListener('pointerup', clear)
-    }, [])
+        const onUp = () => {
+            if (activeThumb) {
+                setActiveThumb(null)
+                commitPrice()
+            }
+        }
+        window.addEventListener('pointerup', onUp)
+        return () => window.removeEventListener('pointerup', onUp)
+    }, [activeThumb, low, high])
 
     return (
         <aside className="tab_bar">
-            <form method="get" action="/catalog/">
+            <form  onSubmit={(e) => { e.preventDefault(); commitPrice() }}>
                 <fieldset className="cat_filter">
                     <legend className="nav_title">Категории</legend>
                     <ul>
                         <li>
                             <label className="cat_item">
-                                <input className="cat_input" type="checkbox" name="category" value="" checked={searchParams.pathname === '/catalog/'} onChange={() => togglePath([])} />
+                                <input className="cat_input" type="checkbox" name="category" value="" checked={selected.length === 0} onChange={onSelectAll} />
                                 <span className="name">Все товары</span>
                                 <span className="length">{products.length}</span>
                             </label>
@@ -50,7 +44,7 @@ const CategoryFilter = ({ products, categories, minPrice, maxPrice }) => {
                         {categories.map((category) => (
                             <li key={category.id}>
                                 <label className="cat_item">
-                                    <input className="cat_input" type="checkbox" name="category" value={category.id} checked={searchParams.includes(category.id)} onChange={() => togglePath(category.id)} />
+                                    <input className="cat_input" type="checkbox" name="category" value={category.id} onChange={() => onToggle(category.id)} checked={selected.includes(category.id)} />
                                     <span className="name">{category.title}</span>
                                     <span className="length">{products.filter((p) => p.category_id === category.id).length}</span>
                                 </label>
@@ -97,16 +91,18 @@ const CategoryFilter = ({ products, categories, minPrice, maxPrice }) => {
                                 min={minPrice}
                                 max={maxPrice}
                                 placeholder="от"
-                                value={low > minPrice ? low : ''}
+                                value={minValue === minPrice ? '' : minValue}
                                 onChange={(e) => setMinValue(Number(e.target.value))}
+                                onBlur={commitPrice}
                             />
                             <input
                                 type="number"
                                 min={minPrice}
                                 max={maxPrice}
                                 placeholder="до"
-                                value={high < maxPrice ? high : ''}
+                                value={maxValue === maxPrice ? '' : maxValue}
                                 onChange={(e) => setMaxValue(Number(e.target.value))}
+                                onBlur={commitPrice}
                             />
                         </div>
                         <span>{minPrice} сум — {maxPrice} сум</span>

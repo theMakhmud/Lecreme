@@ -1,28 +1,17 @@
 ---
 import Layout from '../layouts/Base.astro';
-import Hero from '../components/home/Hero.astro';
-import CategoryList from '../components/home/CategoryList.astro';
-import PopularProducts from '../components/home/PopularProducts.astro';
+
+import ProductCard from '../components/ProductCard';
 
 import { getCollection } from 'astro:content';
-import { priceType } from "../lib/price"
 
-import type { CollectionEntry } from 'astro:content';
 
 const categories  = await getCollection('categories')
 const products  = await getCollection('products')
 
 
-// interface Props {
-//     category: CollectionEntry<'categories'>
-// }
-
 function categoryLength(category: (typeof categories)[number]) {
     return (products.filter((p) => p.data.category_id == category.data.id).length)
-}
-
-function category(product: (typeof products)[number]) {
-    return (categories.find((c) => c.data.id == product.data.category_id))
 }
 
 const popular = products.filter(p => p.data.is_popular)
@@ -93,26 +82,7 @@ const popular = products.filter(p => p.data.is_popular)
             </div>
             <ul class="product_cards">
                 {popular.map( (product) => (
-                    <li>
-                        <article class="card">
-                            <a href={`/category/${category(product)?.data.path.toLowerCase()}/${product?.data.path.toLowerCase()}`}>
-                                <div class="photo"></div>
-                                <div class="info">
-                                    <h3>{product?.data.title}</h3>
-                                    <div>
-                                        <p>Цена</p>
-                                        <span>
-                                            {priceType(product.data)}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <p>Срок</p>
-                                        <span>{product?.data.variants[0].active_minutes} часов</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </article>
-                    </li>
+                    <ProductCard product={product.data} />
                 ))}
             </ul>
 
@@ -267,57 +237,9 @@ const popular = products.filter(p => p.data.is_popular)
     }
 
     .popular_category .product_cards > li {
-        display: flex;
-    }
-
-    .popular_category .product_cards .card {
         cursor: pointer;
-        display: flex;
-        flex: 1;
-        border: 1px solid var(--color-border-soft);
     }
-
-    .popular_category .product_cards .card > a {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        text-decoration: none;
-        color: inherit;
-
-        .photo {
-            aspect-ratio: 1 / 1;
-            background-color: var(--color-plate);;
-        }
-
-        .info {
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 10px;
-
-            h3 {
-                font-size: 20px;
-                font-weight: 600;
-            }
-
-            > div {
-                display: flex;
-                justify-content: space-between;
-
-                p {
-                    color: var(--color-on-surface-muted);
-                    font-size: 14px;
-                    font-weight: 600;
-                }
-
-                span {
-                    font-size: 16px;
-                    font-weight: 600;
-                }
-            }
-        }
-    }
+    
 
     @media (max-width: 768px) {
         .popular_category .product_cards {
