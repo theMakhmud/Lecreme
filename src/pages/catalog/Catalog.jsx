@@ -2,114 +2,150 @@ import { useEffect, useState } from 'react'
 import CategoryFilter from "../../components/category/CategoryFilter"
 import '../catalog/Catalog.css'
 import ProductCard from '../../components/ProductCard'
-import { priceType } from '../../lib/price'
+import { priceType } from '../../lib/price' 
 
-const readUrl = (minBound, maxBound) => {
+const CATALOG_INTRO = 'Все категории — пирожные, десерты, булочки, чизкейки — в одном каталоге. Отмечайте нужные категории и цену слева, чтобы собрать то, что нужно, без переходов между страницами. У каждой позиции свой срок — он производственный, а не рекламный.'
+
+const CATALOG_SEO = `Lecreme — кондитерская, которая печёт под заказ, а не продаёт с полки. У нас нет готовой витрины: каждый десерт, торт или партия пирожных начинает готовиться после оформления заказа, поэтому дата и время выдачи известны заранее и рассчитаны по реальной загрузке производства.
+
+В каталоге — пирожные поштучно от 30 000 сум, порционные десерты и ассорти на развес от 23 000 сум за 100 г, свежие круассаны и булочки, которые печём в день выдачи, и чизкейки целиком трёх диаметров — от 15 см на 4–6 человек до 25 см на большой стол. Отмечайте категории и диапазон цены слева — список обновится без перехода между страницами.
+
+У каждой позиции указан минимальный срок изготовления: он включает работу кондитера и обязательное охлаждение, это производственное время, а не маркетинговый приём. Все позиции можно собрать в один заказ — готовность рассчитается по самой долгой из них, а дату и время мы подтвердим по телефону.`
+
+const readUrl = (min, max) => {
     const param = new URLSearchParams(window.location.search)
-
     return {
         selected: param.getAll('category').map(Number),
-        min: param.has('min') ? Number(param.get('min')) : minBound,
-        max: param.has('max') ? Number(param.get('max')) : maxBound,
-        popular: param.has('popular') ? param.get('popular') === 'true' : true,
-        onPrice: param.get('onPrice') === 'true',
-        onTime: param.get('onTime') === 'true'
+        min: param.has('min') ? Number(param.get('min')) : min,
+        max: param.has('max') ? Number(param.get('max')) : max,
+        sort: param.has('sort') ? param.get('sort') === 'popular' : 'popular',
     }
 }
 
-const ROWS = ['popular', 'onPrice', 'onTime']
+/**
+ * @param {{ products: any[], categories: any[], minPrice: number, maxPrice: number, initialSelected?: number[] }} props
+ */
+const Catalog = ({ products, categories, minPrice, maxPrice, initialSelected = [] }) => {
 
-const Catalog = ({ products, categories, minPrice, maxPrice }) => {
-    const [filter, setFilter] = useState(readUrl(minPrice, maxPrice))
+    const [filter, setFilter] = useState({
+        selected: initialSelected,
+        min: minPrice,
+        max: maxPrice,
+        sort: 'popular',
+    })
+    // TODO: состояние фильтра (selected, min, max, sort)
 
-    const commit = (next) => {
-        setFilter(next)
-        console.log(next)
+
+    // TODO: чтение URL при загрузке + кнопка «назад» (только в браузере, не при серверном рендере)
+
+    const commit = (current) => {
+        setFilter(current)
         const param = new URLSearchParams()
-        next.selected.forEach((id) => param.append('category', id))
-        ROWS.forEach((row) => param.set(row, String(next[row])))
-        if (next.min > minPrice) param.set('min', String(next.min))
-        if (next.max < maxPrice) param.set('max', String(next.max))
+
+        if (current.min > minPrice) param.set('min', String(current.min))
+        if (current.max < maxPrice) param.set('max', String(current.max))
+
+        if (current.sort !== 'popular') param.set('sort', String(current.sort))
+
+        let basePath
+        if (current.selected.length === 1) {
+            basePath = `/${categories.find((c) => c.id === current.selected[0]).path}/`
+        } else {
+            basePath = '/catalog/'
+            current.selected.forEach((id) => param.append('category', id))
+        }
+
         const qs = param.toString()
-        const newUrl = qs ? `${window.location.pathname}?${qs}` : window.location.pathname
-        window.history.pushState({}, '', newUrl)
+        const newUrl = qs ? basePath + '?' + qs : basePath
+        window.history.pushState({}, "", newUrl)
     }
 
-    const { selected, min, max, popular, onPrice, onTime } = filter
+    const { selected, min, max, sort } = filter
+
 
     const toggle = (id) => {
-        const nid = Number(id)
-        const categ = selected.includes(nid)
-            ? selected.filter((curren) => curren !== nid)
-            : [...selected, nid]
+        const categ = selected.includes(Number(id))
+            ? selected.filter((c) => c !== Number(id))
+            : [...selected, Number(id)]
         commit({...filter, selected: categ})
     }
 
-    const toggleRow = (filed) => {
-        commit({...filter, [filed]: !filter[filed]})
+    const sortToggle = (sort) => {
+        commit({...filter, sort: sort})
     }
-    
-    const SelectAll = () => commit({...filter, selected: []})
+
+    const allSelect = () => commit({...filter, selected: []})
     const setPrice = (min, max) => commit({...filter, min, max})
 
-    const visible = products.filter((p) => {
-        const inCat = selected.length === 0 || selected.includes(p.category_id)
+    const sorters = {
+        popular: (a, b) => b.is_popular - a.is_popular,
+        onPrice: (a, b) => priceType(a) - priceType(b),
+        onTime: (a, b) => a.variants[0].active_minutes - b.variants[0].active_minutes
+    }
+
+
+    const visiable = products.filter((p) => {
+        const product = selected.length === 0 || selected.includes(p.category_id)
         const price = priceType(p)
         const inPrice = price >= min && price <= max
-        return inCat && inPrice
-    })
+        return product && inPrice
+    }).sort(sorters[sort])
 
+
+    // TODO: запись состояния в URL (одна категория -> /{path}/, иначе /catalog/?...)
+
+    // TODO: фильтрация по категориям и цене + сортировка -> visible
+
+    // TODO: активная категория для заголовка/описания/SEO-текста
+
+    useEffect( () => {
+        setFilter(readUrl(minPrice, maxPrice))
+    }, [])
 
     return (
         <div className="wrapper">
-            <CategoryFilter 
-                products={products} 
-                categories={categories} 
-                minPrice={minPrice} 
+            <CategoryFilter
+                products={products}
+                categories={categories}
+                minPrice={minPrice}
                 maxPrice={maxPrice}
                 selected={selected}
                 onToggle={toggle}
-                onSelectAll={SelectAll}
+                onSelectAll={allSelect}
                 onSetPrice={setPrice}
-                min={min} 
+                min={min}
                 max={max} />
 
             <section className="products_grid" aria-labelledby="catalog-title">
                 <header className='head'>
                     <span>
-                        <h1>
-                            {selected.length === 1
-                            ? categories.find((c) => c.id === selected[0])?.title
-                            : 'Каталог'}
-                        </h1>
-                        <p>{visible.length} товаров</p>
+                        <h1 id="catalog-title">Каталог</h1>
+                        <p>{visiable.length} товаров</p>
                     </span>
 
-                    <p>
-                        {selected.length === 1
-                            ? categories.find((c) => c.id === selected[0])?.description
-                            : 'Все категории — пирожные, десерты, булочки, чизкейки — в одном каталоге. Отмечайте нужные категории и цену слева, чтобы собрать то, что нужно, без переходов между страницами. У каждой позиции свой срок — он производственный, а не рекламный.'}
-                    </p>
+                    <p>{CATALOG_INTRO}</p>
 
                 </header>
 
                 <div className="row">
                     <p aria-live="polite">
-                        {visible.length} товаров
+                        {visiable.length} товаров
                     </p>
                     <div className="sort" role="group" aria-label="Сортировка">
                         <span id="sort-label">Сортировка:</span>
-                        <button type="button" className={popular ? "active" : ''} onClick={() => toggleRow('popular')} aria-describedby="sort-label">по популярности</button>
-                        <button type="button" className={onPrice ? "active" : ''} onClick={() => toggleRow('onPrice')} aria-describedby="sort-label">по цене</button>
-                        <button type="button" className={onTime ? "active" : ''} onClick={() => toggleRow('onTime')} aria-describedby="sort-label">по времени готовности</button>
+                        <button type="button" onClick={() => sortToggle('popular')} className={`${sort == 'popular' ? 'active' : ''}`} aria-describedby="sort-label">по популярности</button>
+                        <button type="button" onClick={() => sortToggle('onPrice')} className={`${sort == 'onPrice' ? 'active' : ''}`} aria-describedby="sort-label">по цене</button>
+                        <button type="button" onClick={() => sortToggle('onTime')} className={`${sort == 'onTime' ? 'active' : ''}`} aria-describedby="sort-label">по времени готовности</button>
                     </div>
                 </div>
 
                 <ul className="product_cards">
-                    {visible.map((product) => (
+                    {visiable.map((product) => (
                         <ProductCard key={product.id} product={product} />
                     ))}
                 </ul>
+
+                <div className="seo_word">{CATALOG_SEO}</div>
             </section>
         </div>
     )

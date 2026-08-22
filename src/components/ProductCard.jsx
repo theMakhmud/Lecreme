@@ -15,7 +15,7 @@ function formatDuration(minutes) {
 export default function ProductCard({ product }) {
     const categoryPath = categories
         .find((c) => c.id === product.category_id)
-        ?.path.toLowerCase();
+        ?.path;
 
     const price = priceType(product);
     const variant = product.variants[0];
@@ -25,7 +25,7 @@ export default function ProductCard({ product }) {
     return (
         <li>
             <article className="card">
-                <a href={`/category/${categoryPath}/${product.path.toLowerCase()}`}>
+                <a href={`/${categoryPath}/${product.path}/`}>
                     <div className="photo" />
                     <div className="info">
                         <h3>{product.title}</h3>
@@ -53,6 +53,13 @@ export default function ProductCard({ product }) {
                         </div>
                     </div>
                 </a>
+                {!isWeight && !hasSizes ? (
+                    <button type="button" className="card_btn">В корзину</button>
+                ) : (
+                    <a href={`/${categoryPath}/${product.path}/`} className="card_btn card_btn-choose">
+                        {isWeight ? 'Выбрать вес' : 'Выбрать размер'}
+                    </a>
+                )}
             </article>
         </li>
     );

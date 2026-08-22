@@ -7,7 +7,9 @@ const categories = defineCollection({
     schema: z.object({
         id: z.number(),
         title: z.string(),
-        path: z.string()
+        path: z.string(),
+        description: z.string(),
+        seo: z.string()
     }),
 });
 
@@ -18,7 +20,7 @@ const products = defineCollection({
         category_id: z.number(),
         title: z.string(),
         path: z.string(),
-        is_popular: z.boolean(),
+        is_popular: z.number(),
         description: z.string(),
         variants: z.array(
             z.object({

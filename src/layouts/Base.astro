@@ -22,8 +22,8 @@ const { keywords } = Astro.props
 		<Font cssVariable="--font-prata" />
 		<Font cssVariable="--font-mono" />
 		<title>{title}</title>
-		<meta name="description" content=`${description}`>
-		<meta name="keywords" content=`${keywords}`>
+		{description && <meta name="description" content={description} />}
+		{keywords && <meta name="keywords" content={keywords} />}
 	</head>
 	<body>
 		<Header />

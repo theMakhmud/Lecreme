@@ -1,0 +1,35 @@
+---
+import {type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+import Layout from '../layouts/Base.astro';
+import Catalog from '../pages/catalog/Catalog.jsx'
+import { getPriceRange } from '../lib/price';
+
+
+export async function getStaticPaths() {
+    const categories = await getCollection('categories')
+
+    return categories.map((category) => {
+        return {
+            params: {category: category.data.path},
+            props: {category: category.data}
+        }
+    })
+}
+
+const categories  = (await getCollection('categories')).map((c) => c.data)
+const products  = (await getCollection('products')).map((p) => p.data)
+
+const { minPrice, maxPrice } = getPriceRange(products)
+
+type Props = { category: CollectionEntry<'categories'>['data'] };
+
+const { category } = Astro.props as Props;
+---
+
+<Layout
+    title={`${category.title} на заказ — кондитерская Lecreme`}
+    description={category.description}>
+    <Catalog client:load products={products} categories={categories} initialSelected={[category.id]} minPrice={minPrice} maxPrice={maxPrice} />
+</Layout>

@@ -4,7 +4,7 @@
         "category_id": 1,
         "title": "Пирожное \"Наполеон\"",
         "path": "napoleon",
-        "is_popular": true,
+        "is_popular": 3,
         "description": "Слоёное тесто с заварным кремом, классика.",
         "variants": [
             {
@@ -22,7 +22,7 @@
         "category_id": 3,
         "title": "Круассан с миндалём",
         "path": "croissant-almond",
-        "is_popular": false,
+        "is_popular": 4,
         "description": "Слоёный круассан с миндальной начинкой и лепестками.",
         "variants": [
             {
@@ -40,7 +40,7 @@
         "category_id": 1,
         "title": "Пирожное \"Медовик\"",
         "path": "medovik",
-        "is_popular": true,
+        "is_popular": 2,
         "description": "Медовые коржи со сметанным кремом.",
         "variants": [
             {
@@ -58,7 +58,7 @@
         "category_id": 2,
         "title": "Тирамису",
         "path": "tiramisu",
-        "is_popular": false,
+        "is_popular": 1,
         "description": "Классический итальянский десерт с маскарпоне и кофе.",
         "variants": [
             {
@@ -76,7 +76,7 @@
         "category_id": 3,
         "title": "Синнабон классический",
         "path": "cinnabon",
-        "is_popular": true,
+        "is_popular": 6,
         "description": "Булочка с корицей и кремовой глазурью.",
         "variants": [
             {
@@ -94,7 +94,7 @@
         "category_id": 2,
         "title": "Ассорти пирожных на вес",
         "path": "assorti-na-ves",
-        "is_popular": true,
+        "is_popular": 7,
         "description": "Микс мини-пирожных, продаётся на развес.",
         "variants": [
             {
@@ -115,7 +115,7 @@
         "category_id": 3,
         "title": "Круассан классический",
         "path": "croissant-classic",
-        "is_popular": true,
+        "is_popular": 5,
         "description": "Слоёный круассан на сливочном масле.",
         "variants": [
             {
@@ -133,7 +133,7 @@
         "category_id": 1,
         "title": "Пирожное \"Картошка\"",
         "path": "kartoshka",
-        "is_popular": true,
+        "is_popular": 8,
         "description": "Бисквитная крошка с какао и коньячной пропиткой.",
         "variants": [
             {
@@ -150,7 +150,7 @@
         "id": 9,
         "category_id": 2,
         "title": "Профитроли",
-        "is_popular": true,
+        "is_popular": 10,
         "path": "profiteroles",
         "description": "Заварные пирожные с кремом, подаются порцией из пяти штук.",
         "variants": [
@@ -169,7 +169,7 @@
         "category_id": 4,
         "title": "Чизкейк классический Нью-Йорк",
         "path": "cheesecake-new-york",
-        "is_popular": true,
+        "is_popular": 9,
         "description": "Плотный чизкейк на песочной основе, без начинки сверху.",
         "variants": [
             {

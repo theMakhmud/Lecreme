@@ -1,28 +1,21 @@
 ---
 import Layout from '../../layouts/Base.astro';
-import categories from '../../data/category.json';
-import products from '../../data/products.json';
+
+import { getCollection } from 'astro:content';
+
+
+const categories  = (await getCollection('categories')).map((c) => c.data)
+const products  = (await getCollection('products')).map((p) => p.data)
 
 import Catalog from './Catalog.jsx'
-import Breadcrumbs from '../../components/layout/Breadcrumbs.jsx';
 import { getPriceRange } from '../../lib/price';
 
 const { minPrice, maxPrice } = getPriceRange(products);
-
-const breadcrumbs = [
-    { label: 'Главная', href: '/' },
-    { label: 'Каталог', href: '/catalog/' },
-];
 ---
 
-<Layout title={"catalog"}>
-    <Catalog client:only products={products} categories={categories} minPrice={minPrice} maxPrice={maxPrice} />
+<Layout
+    title={"Каталог десертов на заказ — кондитерская Lecreme"}
+    description={"Пирожные, десерты, булочки и чизкейки под заказ. Фильтр по категориям и цене, у каждой позиции — честный производственный срок изготовления."}>
+    <Catalog client:load products={products} categories={categories} minPrice={minPrice} maxPrice={maxPrice} />
 </Layout>
 
-
-<style>
-    .wrapper {
-        display: grid;
-        grid-template-columns: 1fr 4fr;
-    }
-</style>

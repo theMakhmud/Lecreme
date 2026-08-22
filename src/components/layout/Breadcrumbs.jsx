@@ -1,5 +1,8 @@
 import './Breadcrumbs.css'
 
+/**
+ * @param {{ items?: { label: string, href?: string }[] }} props
+ */
 const Breadcrumbs = ({ items = [] }) => {
     return (
         <nav aria-label="Хлебные крошки" className="breadcrumbs">
